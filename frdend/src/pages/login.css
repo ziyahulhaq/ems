@@ -12,7 +12,7 @@ body{
 }
 .main-head{
     position: absolute;
-    top: 64px;
+    top: 24px;
     left: 50%;
     transform: translateX(-50%);
     width: min(92%, 900px);

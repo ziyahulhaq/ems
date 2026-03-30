@@ -4,11 +4,13 @@ import { FaLock } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
 import "./login.css";
 import axios from "axios";
+import { useAuth } from "../Context/authContext";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -18,21 +20,24 @@ function Login() {
     try {
       const response = await axios.post(
         "http://localhost:3444/api/auth/login",
-        {
-          email,
-          password,
-        },
+        { email, password }
       );
+
       if (response.data.success) {
         localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
-        navigate("/admin-dashboard");
+        login(response.data.user);
+
+        if (response.data.user.role === "admin") {
+          navigate("/admin-dashboard");
+          return;
+        }
+        navigate("/employee-dashboard");
       }
-    } catch (err) {
-      if (axios.isAxiosError(err)) {
-        setError(err.response?.data?.error || "Server error");
+    } catch (error) {
+      if (error.response?.data?.error) {
+        setError(error.response.data.error);
       } else {
-        setError("Something went wrong");
+        setError("Server error");
       }
     }
   };
@@ -42,7 +47,6 @@ function Login() {
       <h1 className="main-head">Employee Management System</h1>
       <div className="wrapper">
         <div className="for-box login">
-          {error && <p className="form-error">{error}</p>}
 
           <form onSubmit={handleSubmit}>
             <h1>Login</h1>
@@ -73,6 +77,7 @@ function Login() {
               <a href="#">Forget Password?</a>
             </div>
             <button type="submit">Login</button>
+                      {error && <p className="form-error">{error}</p>}
             <div className="register-link">
               <p>
                 Don't Have An Account?
