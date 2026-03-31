@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { Link, useLocation } from "react-router-dom";
-import "./AdminSideBar.css";
+import "./AdminSideBar.css";    
 
 const navItems = [
   { label: "Dashboard", to: "/admin-dashboard", icon: FaChartPie },

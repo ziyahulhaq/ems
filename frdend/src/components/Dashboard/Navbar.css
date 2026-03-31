@@ -1,5 +1,4 @@
 .dashboard-navbar {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -13,21 +12,8 @@
   box-shadow: 0 10px 30px rgba(4, 29, 34, 0.18);
 }
 
-.dashboard-navbar__left {
-  position: absolute;
-  left: 1.25rem;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
-}
-
 .dashboard-navbar__brand {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   min-width: 0;
-  text-align: center;
-  pointer-events: none;
 }
 
 .dashboard-navbar__eyebrow {
@@ -105,17 +91,20 @@
 }
 
 .dashboard-navbar__button {
-  padding: 0.45rem 0.85rem;
+  padding: 0.5rem 0.9rem;
   border: 1px solid #cbd5e1;
-  border-radius: 6px;
+  border-radius: 8px;
   background: #ffffff;
   color: #0f172a;
   font-size: 0.9rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .dashboard-navbar__button:hover {
   background: #f8fafc;
+  border-color: #94a3b8;
 }
 
 @media (max-width: 640px) {
@@ -124,21 +113,12 @@
     flex-direction: column;
   }
 
-  .dashboard-navbar__left {
-    position: static;
-    transform: none;
-    width: 100%;
-  }
-
   .dashboard-navbar__button {
     width: fit-content;
   }
 
   .dashboard-navbar__brand {
-    position: static;
-    transform: none;
     width: 100%;
-    pointer-events: auto;
   }
 
   .dashboard-navbar__actions {

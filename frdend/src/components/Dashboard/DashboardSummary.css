@@ -1,0 +1,80 @@
+.admin-summary {
+  padding: 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.admin-summary__title {
+  margin: 0 0 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: center;
+}
+
+.admin-summary__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+  gap: 1rem;
+  justify-content: center;
+  justify-items: center;
+}
+
+.summary-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  min-height: 120px;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.summary-card__icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 10px;
+  background: #ecfeff;
+  color: #0f766e;
+  font-size: 1.25rem;
+}
+
+.summary-card__label {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.summary-card__number {
+  margin: 0.25rem 0 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.admin-summary__leave {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 1rem 1.25rem;
+  border: 1px dashed #cbd5e1;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.admin-summary__leave-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.admin-summary__leave-text {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  color: #64748b;
+}

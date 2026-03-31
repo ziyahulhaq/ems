@@ -19,11 +19,8 @@ const Navbar = () => {
         <h2 className="dashboard-navbar__title">
           Welcome back, <span>{user?.name || "User"}</span>
         </h2>
-        
       </div>
- <button className="dashboard-navbar__button" onClick={logout} type="button">
-            Logout
-          </button>
+
       <div className="dashboard-navbar__actions">
         <div className="dashboard-navbar__user">
           <div className="dashboard-navbar__avatar" aria-hidden="true">
@@ -33,8 +30,11 @@ const Navbar = () => {
             <span className="dashboard-navbar__label">Signed in as</span>
             <strong>{user?.role || "Member"}</strong>
           </div>
-         
         </div>
+
+        <button className="dashboard-navbar__button" onClick={logout} type="button">
+          Logout
+        </button>
       </div>
     </header>
   );
