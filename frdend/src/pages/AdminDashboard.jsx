@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import AdminSideBar from "../components/AdminSideBar";
 import Navbar from "../components/Dashboard/Navbar";
-import AdminSummery from "../components/Dashboard/AdminSummery";
 import "./AdminDashboard.css";
+import { Outlet } from "react-router-dom";
 
 
 const AdminDashboard = () => {
@@ -35,10 +35,9 @@ const AdminDashboard = () => {
       <AdminSideBar />
       <main className="admin-dashboard__content">
         <Navbar />
-        <AdminSummery />
+        <Outlet />
       </main>
     </div>
-    
   );
 };
 

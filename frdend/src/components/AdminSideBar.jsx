@@ -29,10 +29,10 @@ const AdminSideBar = ({ isOpen, closeSidebar }) => {
       aria-label="Admin sidebar"
     >
       <div className="admin-sidebar__brand">
-        <div className="admin-sidebar__logo">WZ</div>
+        <div className="admin-sidebar__logo">TM</div>
         <div>
-          <h1 className="admin-sidebar__title">WIZZO ADMIN</h1>
-          <p className="admin-sidebar__subtitle">WIZZo Management</p>
+          <h1 className="admin-sidebar__title">TSMC</h1>
+          <p className="admin-sidebar__subtitle">TSMC Management</p>
         </div>
       </div>
 

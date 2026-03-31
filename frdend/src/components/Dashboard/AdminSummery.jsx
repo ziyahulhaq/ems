@@ -1,47 +1,88 @@
-
-import React from 'react'
-import SummeryCard from './SummeryCard'
-import { FaBuilding, FaDollarSign, FaFileAlt, FaUsers } from 'react-icons/fa'
+import React from "react";
+import {
+  FaBuilding,
+  FaCheckCircle,
+  FaDollarSign,
+  FaFileAlt,
+  FaHourglassHalf,
+  FaTimesCircle,
+  FaUsers,
+} from "react-icons/fa";
+import SummeryCard from "./SummeryCard";
 import "./DashboardSummary.css";
-import { FcApproval } from "react-icons/fc";
-import { GiSandsOfTime } from "react-icons/gi";
-import { ImCross } from "react-icons/im";
-
 
 const AdminSummery = () => {
   return (
     <div className="admin-summary">
-      <h3 className="admin-summary__title">Dashboard Overview</h3>
-
-      <div className="admin-summary__grid">
-        <SummeryCard icon={<FaUsers />} text="Total Employees" number={13} />
-        <SummeryCard
-          icon={<FaBuilding />}
-          text="Total Department"
-          number={7}
-          iconColor="#b45309"
-          iconBg="#fef3c7"
-        />
-        <SummeryCard
-          icon={<FaDollarSign />}
-          text="Monthly Salary"
-          number={"$234"}
-          iconColor="#15803d"
-          iconBg="#dcfce7"
-        />
-      </div>
-
-      <div className="admin-summary__leave">
-        <h3 className="admin-summary__leave-title">Leave Details</h3>
-        <div className="admin-summary__leave-grid">
-          <SummeryCard icon={<FaFileAlt />} text="Leave Applied" number={13} />
-          <SummeryCard icon={<FcApproval />} text="Leave Approved" number={13} />
-          <SummeryCard icon={<GiSandsOfTime />} text="Leave Pending" number={13} />
-          <SummeryCard icon={<ImCross />} text="Leave Rejected" number={13} />
+      <section className="admin-summary__overview">
+        <h3 className="admin-summary__section-title">Dashboard Overview</h3>
+        <div className="admin-summary__overview-grid">
+          <SummeryCard
+            variant="compact"
+            icon={<FaUsers />}
+            text="Total Employees"
+            number={13}
+            iconColor="#ffffff"
+            iconBg="#14b8a6"
+          />
+          <SummeryCard
+            variant="compact"
+            icon={<FaBuilding />}
+            text="Total Department"
+            number={7}
+            iconColor="#ffffff"
+            iconBg="#f59e0b"
+          />
+          <SummeryCard
+            variant="compact"
+            icon={<FaDollarSign />}
+            text="Monthly Salary"
+            number={"$234"}
+            iconColor="#ffffff"
+            iconBg="#22c55e"
+          />
         </div>
-      </div>
-    </div>
-  )
-}
+      </section>
 
-export default AdminSummery
+      <section className="admin-summary__leave">
+        <h3 className="admin-summary__section-title">Leave Details</h3>
+        <div className="admin-summary__leave-grid">
+          <SummeryCard
+            variant="compact"
+            icon={<FaFileAlt />}
+            text="Leave Applied"
+            number={5}
+            iconColor="#ffffff"
+            iconBg="#14b8a6"
+          />
+          <SummeryCard
+            variant="compact"
+            icon={<FaCheckCircle />}
+            text="Leave Approved"
+            number={2}
+            iconColor="#ffffff"
+            iconBg="#22c55e"
+          />
+          <SummeryCard
+            variant="compact"
+            icon={<FaHourglassHalf />}
+            text="Leave Pending"
+            number={4}
+            iconColor="#ffffff"
+            iconBg="#d97706"
+          />
+          <SummeryCard
+            variant="compact"
+            icon={<FaTimesCircle />}
+            text="Leave Rejected"
+            number={1}
+            iconColor="#ffffff"
+            iconBg="#e11d48"
+          />
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default AdminSummery;
