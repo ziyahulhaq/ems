@@ -78,3 +78,16 @@
   font-size: 0.95rem;
   color: #64748b;
 }
+
+.admin-summary__leave-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.admin-summary__leave-grid .summary-card {
+  flex: 1 1 220px;
+  max-width: 260px;
+}

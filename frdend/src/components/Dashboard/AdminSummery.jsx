@@ -1,8 +1,12 @@
 
 import React from 'react'
 import SummeryCard from './SummeryCard'
-import { FaBuilding, FaDollarSign, FaUsers } from 'react-icons/fa'
+import { FaBuilding, FaDollarSign, FaFileAlt, FaUsers } from 'react-icons/fa'
 import "./DashboardSummary.css";
+import { FcApproval } from "react-icons/fc";
+import { GiSandsOfTime } from "react-icons/gi";
+import { ImCross } from "react-icons/im";
+
 
 const AdminSummery = () => {
   return (
@@ -29,6 +33,12 @@ const AdminSummery = () => {
 
       <div className="admin-summary__leave">
         <h3 className="admin-summary__leave-title">Leave Details</h3>
+        <div className="admin-summary__leave-grid">
+          <SummeryCard icon={<FaFileAlt />} text="Leave Applied" number={13} />
+          <SummeryCard icon={<FcApproval />} text="Leave Approved" number={13} />
+          <SummeryCard icon={<GiSandsOfTime />} text="Leave Pending" number={13} />
+          <SummeryCard icon={<ImCross />} text="Leave Rejected" number={13} />
+        </div>
       </div>
     </div>
   )

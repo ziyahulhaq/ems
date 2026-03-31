@@ -44,47 +44,49 @@ function Login() {
 
   return (
     <>
-      <h1 className="main-head">Employee Management System</h1>
-      <div className="wrapper">
-        <div className="for-box login">
+      <div className="login-page">
+        <h1 className="main-head">Employee Management System</h1>
+        <div className="wrapper">
+          <div className="for-box login">
 
-          <form onSubmit={handleSubmit}>
-            <h1>Login</h1>
-            <div className="input-box">
-              <input
-                type="email"
-                placeholder="Email"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <FaEnvelope className="icon" />
-            </div>
+            <form onSubmit={handleSubmit}>
+              <h2>Login</h2>
+              <div className="input-box">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <FaEnvelope className="icon" />
+              </div>
 
-            <div className="input-box">
-              <input
-                type="Password"
-                placeholder="Password"
-                required
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <FaLock className="icon" />
-            </div>
-            <div className="remember-forget">
-              <label>
-                {" "}
-                <input type="checkbox"></input>Remember Me
-              </label>
-              <a href="#">Forget Password?</a>
-            </div>
-            <button type="submit">Login</button>
-                      {error && <p className="form-error">{error}</p>}
-            <div className="register-link">
-              <p>
-                Don't Have An Account?
-                <a href="/register">Register</a>
-              </p>
-            </div>
-          </form>
+              <div className="input-box">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  required
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <FaLock className="icon" />
+              </div>
+              <div className="remember-forget">
+                <label>
+                  <input type="checkbox" />
+                  Remember Me
+                </label>
+                <a href="#">Forget Password?</a>
+              </div>
+              <button type="submit">Login</button>
+              {error && <p className="form-error">{error}</p>}
+              <div className="register-link">
+                <p>
+                  Don't Have An Account?
+                  <a href="/register">Register</a>
+                </p>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </>

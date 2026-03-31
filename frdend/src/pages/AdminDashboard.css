@@ -11,15 +11,14 @@
   flex: 1;
   min-width: 0;
   height: 100vh;
-  overflow-y: auto;
+  overflow: hidden;
   background:
     radial-gradient(circle at top right, rgba(20, 184, 166, 0.08), transparent 24%),
     #f8fafc;
 }
 
 .admin-dashboard__content > :first-child {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 20;
 }
 

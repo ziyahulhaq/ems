@@ -15,19 +15,29 @@ body {
   font-family: "Poppins", sans-serif;
   background:
     radial-gradient(circle at top, rgba(20, 184, 166, 0.14), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(14, 116, 144, 0.12), transparent 28%),
+  radial-gradient(circle at bottom right, rgba(14, 116, 144, 0.12), transparent 28%),
     linear-gradient(180deg, #f8fffe 0%, #eefbf9 100%);
   color: #0f172a;
   display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px 16px 32px;
+}
+
+.login-page {
+  width: 100%;
+  min-height: calc(100vh - 56px);
+  display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 32px 16px;
+  justify-content: flex-start;
+  gap: 24px;
+  padding-top: 8px;
 }
 
 .main-head {
   width: min(920px, 100%);
-  margin: 0 0 28px;
+  margin: 0;
   text-align: center;
   font-size: clamp(2rem, 4vw, 3.4rem);
   font-weight: 800;
@@ -103,6 +113,14 @@ body {
 }
 
 form h1 {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+form h2 {
   margin: 0 0 22px;
   text-align: center;
   font-size: 2rem;
@@ -242,12 +260,15 @@ form button:active {
 
 @media (max-width: 600px) {
   body {
-    justify-content: flex-start;
-    padding-top: 28px;
+    padding-top: 16px;
+  }
+
+  .login-page {
+    min-height: calc(100vh - 32px);
+    gap: 18px;
   }
 
   .main-head {
-    margin-bottom: 20px;
     font-size: clamp(1.8rem, 7vw, 2.4rem);
   }
 
@@ -259,7 +280,7 @@ form button:active {
     padding: 32px 20px;
   }
 
-  form h1 {
+  form h2 {
     font-size: 1.7rem;
   }
 
