@@ -8,33 +8,35 @@ const AddDepartment = () => {
     dep_name: "",
     description: "",
   });
-const navigate = useNavigate()
+  const navigate = useNavigate();
 
-const handleChange = (e) => {
-  const {name , value} = e.target ;
-  setDepartment({...department , [name] : value})
-}
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDepartment({ ...department, [name]: value });
+  };
 
-const handleSubmit = (e) => {
-  e.preventDefault()
-try{
-  const response = await axios.post('http://localhost:3444/api/department/add',department,{
-    headers:{
-      "Authorization" : `Bearer ${localstorage.getItem('token')}`
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:3444/api/department/add",
+        department,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+
+      if (response.data.success) {
+        navigate("/admin-dashboard/departments");
+      }
+    } catch (err) {
+      const message = err.response?.data?.error || "Failed to add department";
+      alert(message);
     }
-  })
-if(response.data.success){
-navigate("/admin-dashboard/departments")
-
-}
-}catch(err){
-if(err.response && !err.response.data.success){
-  alert(err.response.data.err)
-}
-}
-
-
-}
+  };
 
   return (
     <div className="add-department">
@@ -55,6 +57,8 @@ if(err.response && !err.response.data.success){
             <input
               className="add-department__input"
               id="dep_name"
+              name="dep_name"
+              value={department.dep_name}
               onChange={handleChange}
               type="text"
               placeholder="Enter department name"
@@ -69,6 +73,7 @@ if(err.response && !err.response.data.success){
               className="add-department__textarea"
               id="description"
               name="description"
+              value={department.description}
               onChange={handleChange}
               placeholder="Write a short description..."
               rows="5"

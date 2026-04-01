@@ -64,6 +64,70 @@
   transform: translateY(-1px);
 }
 
+.department-list__table-wrap {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.department-list__table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.department-list__table th,
+.department-list__table td {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.department-list__table th {
+  background: #0f766e;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.department-list__table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+.department-list__table tbody tr:hover {
+  background: #ecfeff;
+}
+
+.department-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.department-actions__button {
+  border: none;
+  border-radius: 8px;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
+}
+
+.department-actions__button:hover {
+  transform: translateY(-1px);
+}
+
+.department-actions__button--edit {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.department-actions__button--delete {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
 @media (max-width: 640px) {
   .department-list {
     margin: 1rem;
@@ -77,5 +141,10 @@
 
   .department-list__button {
     width: 100%;
+  }
+
+  .department-list__table th,
+  .department-list__table td {
+    padding: 0.8rem 0.75rem;
   }
 }
