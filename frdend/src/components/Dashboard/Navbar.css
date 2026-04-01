@@ -6,25 +6,20 @@
   gap: 1rem;
   padding: 1rem 1.25rem;
   background:
-    radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 26%),
-    linear-gradient(135deg, #0f766e 0%, #115e59 48%, #0f3f46 100%);
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.16), transparent 22%),
+    linear-gradient(135deg, #0f766e 0%, #0f5f66 42%, #0f3f46 100%);
   color: #f6fffe;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 10px 30px rgba(4, 29, 34, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 16px 34px rgba(4, 29, 34, 0.16);
 }
 
 .dashboard-navbar__left {
-  position: absolute;
-  left: 1.25rem;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
+  display: none;
+  flex: 0 0 auto;
 }
 
 .dashboard-navbar__brand {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  flex: 1;
   min-width: 0;
   text-align: center;
   pointer-events: none;
@@ -42,7 +37,8 @@
 
 .dashboard-navbar__title {
   margin: 0;
-  font-size: clamp(1.05rem, 1.7vw, 1.55rem);
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: clamp(1.05rem, 1.7vw, 1.6rem);
   line-height: 1.2;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -59,6 +55,26 @@
   gap: 0.9rem;
   flex-wrap: wrap;
   justify-content: flex-end;
+}
+
+.dashboard-navbar__menu-button {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f6fffe;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.dashboard-navbar__menu-button:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .dashboard-navbar__user {
@@ -105,30 +121,29 @@
 }
 
 .dashboard-navbar__button {
-  
   padding: 0.45rem 0.85rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.92);
   color: #0f172a;
   font-size: 0.9rem;
   cursor: pointer;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
 }
 
 .dashboard-navbar__button:hover {
-  background: #f8fafc;
+  background: #ffffff;
 }
 
 @media (max-width: 640px) {
   .dashboard-navbar {
     align-items: flex-start;
     flex-direction: column;
+    gap: 0.85rem;
   }
 
   .dashboard-navbar__left {
-    position: static;
-    transform: none;
-    width: 100%;
+    display: block;
   }
 
   .dashboard-navbar__button {
@@ -136,10 +151,9 @@
   }
 
   .dashboard-navbar__brand {
-    position: static;
-    transform: none;
     width: 100%;
     pointer-events: auto;
+    text-align: left;
   }
 
   .dashboard-navbar__actions {
@@ -150,5 +164,23 @@
   .dashboard-navbar__user {
     flex: 1;
     min-width: 0;
+  }
+
+  .dashboard-navbar__menu-button {
+    margin-top: 0.1rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .dashboard-navbar {
+    padding: 0.9rem;
+  }
+
+  .dashboard-navbar__user {
+    padding: 0.5rem 0.7rem;
+  }
+
+  .dashboard-navbar__meta strong {
+    font-size: 0.85rem;
   }
 }

@@ -25,6 +25,7 @@ const DepartmentList = () => {
             _id: dep._id,
             sno: sno++,
             dep_name: dep.dep_name,
+            action: <DepartmentButtons DepId={dep._id} />,
           }));
           setDepartments(data);
         }
@@ -76,9 +77,7 @@ const DepartmentList = () => {
                     <tr key={department._id}>
                       <td>{department.sno}</td>
                       <td>{department.dep_name}</td>
-                      <td>
-                        <DepartmentButtons departmentId={department._id} />
-                      </td>
+                      <td>{department.action}</td>
                     </tr>
                   ))
                 ) : (

@@ -8,7 +8,7 @@ import AdminSummery from "./components/Dashboard/AdminSummery";
 import DepartmentList from "./components/Department/DepartmentList";
 import EmployeeDashboard from "./pages/EmployeeDashboard";
 import AddDepartment from "./components/Department/AddDepartment.jsx";
-
+import EditDepartment from "./components/Department/EditDepartment.jsx";
 
 function App() {
   return (
@@ -30,11 +30,19 @@ function App() {
             }
           >
             <Route index element={<AdminSummery />} />
-            <Route path="/admin-dashboard/departments" element={<DepartmentList />} />
-            <Route path="/admin-dashboard/add-department" element={<AddDepartment />} />
-
+            <Route
+              path="/admin-dashboard/departments"
+              element={<DepartmentList />}
+            />
+            <Route
+              path="/admin-dashboard/add-department"
+              element={<AddDepartment />}
+            />
+            <Route
+              path="/admin-dashboard/department/:id"
+              element={<EditDepartment />}
+            />
           </Route>
-
           <Route
             path="/employee-dashboard"
             element={

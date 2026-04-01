@@ -1,40 +1,34 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AdminSideBar from "../components/AdminSideBar";
 import Navbar from "../components/Dashboard/Navbar";
 import "./AdminDashboard.css";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 
 const AdminDashboard = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const location = useLocation();
+
   useEffect(() => {
-    const { style } = document.body;
-    const { style: rootStyle } = document.documentElement;
-    const previousBodyOverflow = style.overflow;
-    const previousBodyHeight = style.height;
-    const previousBodyPadding = style.padding;
-    const previousBodyDisplay = style.display;
-    const previousRootOverflow = rootStyle.overflow;
-
-    style.overflow = "hidden";
-    style.height = "100vh";
-    style.padding = "0";
-    style.display = "block";
-    rootStyle.overflow = "hidden";
-
-    return () => {
-      style.overflow = previousBodyOverflow;
-      style.height = previousBodyHeight;
-      style.padding = previousBodyPadding;
-      style.display = previousBodyDisplay;
-      rootStyle.overflow = previousRootOverflow;
-    };
-  }, []);
+    setIsSidebarOpen(false);
+  }, [location.pathname]);
 
   return (
     <div className="admin-dashboard">
-      <AdminSideBar />
+      <AdminSideBar
+        isOpen={isSidebarOpen}
+        closeSidebar={() => setIsSidebarOpen(false)}
+      />
+      <button
+        className={`admin-dashboard__backdrop ${
+          isSidebarOpen ? "admin-dashboard__backdrop--visible" : ""
+        }`}
+        type="button"
+        aria-label="Close navigation"
+        onClick={() => setIsSidebarOpen(false)}
+      />
       <main className="admin-dashboard__content">
-        <Navbar />
+        <Navbar onMenuClick={() => setIsSidebarOpen((open) => !open)} />
         <Outlet />
       </main>
     </div>

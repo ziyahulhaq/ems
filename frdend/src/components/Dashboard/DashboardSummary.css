@@ -1,14 +1,17 @@
 .admin-summary {
-  padding: 1.5rem;
-  max-width: 1100px;
+  width: min(100%, 1100px);
+  padding: clamp(1rem, 2vw, 1.5rem);
   margin: 0 auto;
 }
 
 .admin-summary__overview,
 .admin-summary__leave {
   padding: 1.25rem;
-  border-radius: 18px;
-  background: #f3f4f6;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 250, 252, 0.88));
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.08);
 }
 
 .admin-summary__overview {
@@ -18,6 +21,7 @@
 .admin-summary__section-title {
   margin: 0 0 1rem;
   text-align: center;
+  font-family: "Space Grotesk", "Inter", sans-serif;
   font-size: 1.25rem;
   font-weight: 700;
   color: #0f172a;
@@ -26,7 +30,7 @@
 .admin-summary__overview-grid,
 .admin-summary__leave-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
   align-items: stretch;
 }
@@ -43,18 +47,18 @@
   height: 100%;
   min-height: 118px;
   padding: 1.1rem 1.2rem;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.94));
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
 }
 
 .summary-card__icon {
   display: grid;
   place-items: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 10px;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 14px;
   background: #ecfeff;
   color: #0f766e;
   font-size: 1.25rem;
@@ -77,8 +81,8 @@
   min-height: 60px;
   padding: 0;
   overflow: hidden;
-  border: 1px solid #eef2f7;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
 }
 
 .summary-card--compact .summary-card__icon {
@@ -100,14 +104,14 @@
 .summary-card--compact .summary-card__label {
   font-size: 1rem;
   font-weight: 500;
-  color: #111827;
+  color: #0f172a;
 }
 
 .summary-card--compact .summary-card__number {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 700;
-  color: #111827;
+  color: #0f172a;
 }
 
 @media (max-width: 640px) {
@@ -115,13 +119,22 @@
     padding: 1rem;
   }
 
-  .admin-summary__overview-grid,
-  .admin-summary__leave-grid {
-    grid-template-columns: 1fr;
-  }
-
   .summary-card--compact .summary-card__icon {
     width: 4rem;
     height: 4rem;
+  }
+
+  .admin-summary__overview,
+  .admin-summary__leave {
+    padding: 1rem;
+    border-radius: 18px;
+  }
+
+  .admin-summary__section-title {
+    font-size: 1.1rem;
+  }
+
+  .summary-card--compact {
+    min-height: 56px;
   }
 }

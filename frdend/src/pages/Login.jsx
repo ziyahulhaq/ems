@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaLock } from "react-icons/fa";
-import { FaEnvelope } from "react-icons/fa";
+import { FaEnvelope, FaLock, FaShieldAlt, FaUsers, FaArrowRight } from "react-icons/fa";
 import "./login.css";
 import axios from "axios";
 import { useAuth } from "../Context/authContext";
@@ -18,10 +17,10 @@ function Login() {
     setError(null);
 
     try {
-      const response = await axios.post(
-        "http://localhost:3444/api/auth/login",
-        { email, password }
-      );
+      const response = await axios.post("http://localhost:3444/api/auth/login", {
+        email,
+        password,
+      });
 
       if (response.data.success) {
         localStorage.setItem("token", response.data.token);
@@ -31,11 +30,12 @@ function Login() {
           navigate("/admin-dashboard");
           return;
         }
+
         navigate("/employee-dashboard");
       }
-    } catch (error) {
-      if (error.response?.data?.error) {
-        setError(error.response.data.error);
+    } catch (err) {
+      if (err.response?.data?.error) {
+        setError(err.response.data.error);
       } else {
         setError("Server error");
       }
@@ -43,53 +43,100 @@ function Login() {
   };
 
   return (
-    <>
-      <div className="login-page">
-        <h1 className="main-head">Employee Management System</h1>
-        <div className="wrapper">
-          <div className="for-box login">
+    <div className="login-page">
+      <div className="login-shell">
+        <section className="login-hero">
+          <div className="login-hero__badge">
+            <FaShieldAlt />
+            Secure workforce access
+          </div>
+          <h1 className="login-hero__title">Manage your team from one focused workspace.</h1>
+          <p className="login-hero__text">
+            Keep departments, employees, leaves, and payroll aligned in a dashboard
+            that works beautifully on desktop and mobile.
+          </p>
 
-            <form onSubmit={handleSubmit}>
-              <h2>Login</h2>
-              <div className="input-box">
+          <div className="login-hero__stats">
+            <div className="login-hero__stat">
+              <FaUsers />
+              <div>
+                <strong>Team-ready</strong>
+                <span>Admin and employee access</span>
+              </div>
+            </div>
+            <div className="login-hero__stat">
+              <FaArrowRight />
+              <div>
+                <strong>Fast workflow</strong>
+                <span>Login and get moving quickly</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="login-card" aria-label="Login form">
+          <div className="login-card__header">
+            <p className="login-card__eyebrow">Employee Management System</p>
+            <h2 className="login-card__title">Welcome back</h2>
+            <p className="login-card__subtitle">
+              Sign in to access your dashboard and team tools.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="login-form">
+            <div className="login-field">
+              <label className="login-field__label" htmlFor="email">
+                Email
+              </label>
+              <div className="login-field__control">
                 <input
+                  id="email"
                   type="email"
-                  placeholder="Email"
+                  placeholder="Enter your email"
                   required
                   onChange={(e) => setEmail(e.target.value)}
                 />
-                <FaEnvelope className="icon" />
+                <FaEnvelope className="login-field__icon" />
               </div>
+            </div>
 
-              <div className="input-box">
+            <div className="login-field">
+              <label className="login-field__label" htmlFor="password">
+                Password
+              </label>
+              <div className="login-field__control">
                 <input
+                  id="password"
                   type="password"
-                  placeholder="Password"
+                  placeholder="Enter your password"
                   required
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <FaLock className="icon" />
+                <FaLock className="login-field__icon" />
               </div>
-              <div className="remember-forget">
-                <label>
-                  <input type="checkbox" />
-                  Remember Me
-                </label>
-                <a href="#">Forget Password?</a>
-              </div>
-              <button type="submit">Login</button>
-              {error && <p className="form-error">{error}</p>}
-              <div className="register-link">
-                <p>
-                  Don't Have An Account?
-                  <a href="/register">Register</a>
-                </p>
-              </div>
-            </form>
-          </div>
-        </div>
+            </div>
+
+            <div className="login-form__row">
+              <label className="login-form__checkbox">
+                <input type="checkbox" />
+                Remember me
+              </label>
+              <a href="#">Forgot password?</a>
+            </div>
+
+            <button className="login-form__button" type="submit">
+              Login
+            </button>
+
+            {error && <p className="login-form__error">{error}</p>}
+
+            <p className="login-form__footer">
+              Need an account? <a href="/register">Register</a>
+            </p>
+          </form>
+        </section>
       </div>
-    </>
+    </div>
   );
 }
 

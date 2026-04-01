@@ -1,20 +1,25 @@
 .admin-dashboard {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   display: flex;
   align-items: stretch;
-  overflow: hidden;
-  background: #f8fafc;
+  overflow-x: clip;
+  background:
+    radial-gradient(circle at top left, rgba(20, 184, 166, 0.1), transparent 26%),
+    radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.08), transparent 24%),
+    linear-gradient(180deg, #f8fafc 0%, #eef7f6 100%);
 }
 
 .admin-dashboard__content {
   flex: 1;
   min-width: 0;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
   background:
     radial-gradient(circle at top right, rgba(20, 184, 166, 0.08), transparent 24%),
-    #f8fafc;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
 }
 
 .admin-dashboard__content > :first-child {
@@ -22,15 +27,37 @@
   z-index: 20;
 }
 
+.admin-dashboard__backdrop {
+  display: none;
+}
+
 @media (max-width: 767px) {
   .admin-dashboard {
-    display: block;
     width: 100%;
-    overflow: visible;
+    overflow: hidden;
   }
 
   .admin-dashboard__content {
-    height: auto;
-    overflow: visible;
+    min-height: 100svh;
+    width: 100%;
+    overflow: auto;
+  }
+
+  .admin-dashboard__backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    border: 0;
+    padding: 0;
+    background: rgba(15, 23, 42, 0.42);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease;
+  }
+
+  .admin-dashboard__backdrop--visible {
+    opacity: 1;
+    pointer-events: auto;
   }
 }

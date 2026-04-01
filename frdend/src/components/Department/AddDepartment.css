@@ -1,6 +1,6 @@
 .add-department {
   min-height: 100vh;
-  padding: 1.5rem;
+  padding: clamp(1rem, 2vw, 1.75rem);
   background:
     radial-gradient(circle at top left, rgba(20, 184, 166, 0.12), transparent 26%),
     radial-gradient(circle at bottom right, rgba(15, 118, 110, 0.1), transparent 22%),
@@ -8,17 +8,17 @@
 }
 
 .add-department__card {
-  max-width: 720px;
+  width: min(100%, 720px);
   margin: 1.5rem auto;
-  padding: 1.75rem;
-  border-radius: 20px;
+  padding: clamp(1.1rem, 2vw, 1.75rem);
+  border-radius: 24px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.98));
-  border: 1px solid #e2e8f0;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.95));
+  border: 1px solid rgba(148, 163, 184, 0.18);
   box-shadow:
-    0 22px 45px rgba(15, 23, 42, 0.08),
-    0 3px 10px rgba(15, 23, 42, 0.04);
-  backdrop-filter: blur(10px);
+    0 26px 55px rgba(15, 23, 42, 0.1),
+    0 6px 18px rgba(15, 23, 42, 0.04);
+  backdrop-filter: blur(14px);
   position: relative;
   overflow: hidden;
 }
@@ -46,6 +46,7 @@
 
 .add-department__title {
   margin: 0;
+  font-family: "Space Grotesk", "Inter", sans-serif;
   font-size: clamp(1.45rem, 2vw, 1.8rem);
   line-height: 1.2;
   color: #0f172a;
@@ -78,9 +79,9 @@
 .add-department__input,
 .add-department__textarea {
   width: 100%;
-  border: 1px solid #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: 14px;
-  background: #f8fafc;
+  background: rgba(248, 250, 252, 0.95);
   color: #0f172a;
   font-size: 0.98rem;
   padding: 0.9rem 1rem;
@@ -114,7 +115,7 @@
 .add-department__button {
   justify-self: start;
   border: none;
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 0.9rem 1.4rem;
   background: linear-gradient(135deg, #0f766e, #14b8a6);
   color: #ffffff;
@@ -141,13 +142,22 @@
 
 @media (max-width: 640px) {
   .add-department {
-    padding: 1rem;
+    min-height: auto;
+    padding: 0.85rem;
   }
 
   .add-department__card {
-    margin: 0.75rem auto;
-    padding: 1.1rem;
-    border-radius: 16px;
+    margin: 0.5rem auto;
+    padding: 1rem;
+    border-radius: 18px;
+  }
+
+  .add-department__header {
+    margin-bottom: 1rem;
+  }
+
+  .add-department__subtitle {
+    font-size: 0.95rem;
   }
 
   .add-department__title {
@@ -157,5 +167,27 @@
   .add-department__button {
     width: 100%;
     justify-self: stretch;
+  }
+}
+
+@media (max-width: 420px) {
+  .add-department__card {
+    padding: 0.9rem;
+    border-radius: 14px;
+  }
+
+  .add-department__input,
+  .add-department__textarea {
+    padding: 0.8rem 0.9rem;
+    font-size: 0.95rem;
+  }
+
+  .add-department__label {
+    font-size: 0.92rem;
+  }
+
+  .add-department__button {
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
   }
 }

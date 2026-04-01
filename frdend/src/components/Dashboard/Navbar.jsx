@@ -1,7 +1,8 @@
 import { useAuth } from "../../Context/authContext";
+import { FaBars } from "react-icons/fa";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ onMenuClick }) => {
   const { user, logout } = useAuth();
   const initials = user?.name
     ? user.name
@@ -14,6 +15,17 @@ const Navbar = () => {
 
   return (
     <header className="dashboard-navbar">
+      <div className="dashboard-navbar__left">
+        <button
+          className="dashboard-navbar__menu-button"
+          type="button"
+          aria-label="Open navigation"
+          onClick={onMenuClick}
+        >
+          <FaBars />
+        </button>
+      </div>
+
       <div className="dashboard-navbar__brand">
         <span className="dashboard-navbar__eyebrow">Employee Management</span>
         <h2 className="dashboard-navbar__title">
