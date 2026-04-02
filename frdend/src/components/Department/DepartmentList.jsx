@@ -7,6 +7,13 @@ import axios from "axios";
 const DepartmentList = () => {
   const [departments, setDepartments] = useState([]);
   const [depLoading, setDepLoading] = useState(false);
+
+  const onDepartmentDelete = (id) => {
+    setDepartments((currentDepartments) =>
+      currentDepartments.filter((dep) => dep._id !== id),
+    );
+  };
+
   useEffect(() => {
     const fetchDepartments = async () => {
       setDepLoading(true);
@@ -20,14 +27,7 @@ const DepartmentList = () => {
           },
         );
         if (response.data.success) {
-          let sno = 1;
-          const data = response.data.departments.map((dep) => ({
-            _id: dep._id,
-            sno: sno++,
-            dep_name: dep.dep_name,
-            action: <DepartmentButtons DepId={dep._id} />,
-          }));
-          setDepartments(data);
+          setDepartments(response.data.departments);
         }
       } catch (err) {
         const message = err.response?.data?.error || "Failed to add department";
@@ -73,11 +73,16 @@ const DepartmentList = () => {
               </thead>
               <tbody>
                 {departments.length > 0 ? (
-                  departments.map((department) => (
+                  departments.map((department, index) => (
                     <tr key={department._id}>
-                      <td>{department.sno}</td>
+                      <td>{index + 1}</td>
                       <td>{department.dep_name}</td>
-                      <td>{department.action}</td>
+                      <td>
+                        <DepartmentButtons
+                          DepId={department._id}
+                          onDepartmentDelete={onDepartmentDelete}
+                        />
+                      </td>
                     </tr>
                   ))
                 ) : (
