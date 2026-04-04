@@ -1,52 +1,89 @@
+import axios from "axios";
 import { createContext, useEffect, useMemo, useState } from "react";
 
 const EmployeeContext = createContext(null);
-
-const EMPLOYEE_STORAGE_KEY = "employees";
-
-const getStoredEmployees = () => {
-  if (typeof window === "undefined") {
-    return [];
-  }
-
-  try {
-    const storedEmployees = window.localStorage.getItem(EMPLOYEE_STORAGE_KEY);
-    const parsedEmployees = storedEmployees ? JSON.parse(storedEmployees) : [];
-
-    return Array.isArray(parsedEmployees) ? parsedEmployees : [];
-  } catch {
-    return [];
-  }
-};
-
-const createEmployeeId = () =>
-  `EMP-${Math.floor(1000 + Math.random() * 9000)}`;
+const EMPLOYEE_API_URL = "http://localhost:3444/api/employee";
 
 const EmployeeProvider = ({ children }) => {
-  const [employees, setEmployees] = useState(getStoredEmployees);
+  const [employees, setEmployees] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  const refreshEmployees = async () => {
+    const token = window.localStorage.getItem("token");
+
+    if (!token) {
+      setEmployees([]);
+      setError("");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError("");
+      const response = await axios.get(EMPLOYEE_API_URL, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.data.success) {
+        setEmployees(response.data.employees);
+      }
+    } catch (fetchError) {
+      setError(fetchError.response?.data?.error || "Failed to load employees");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    window.localStorage.setItem(
-      EMPLOYEE_STORAGE_KEY,
-      JSON.stringify(employees),
-    );
-  }, [employees]);
+    refreshEmployees();
+    window.addEventListener("auth-changed", refreshEmployees);
+
+    return () => {
+      window.removeEventListener("auth-changed", refreshEmployees);
+    };
+  }, []);
 
   const value = useMemo(
     () => ({
       employees,
-      addEmployee: (employee) => {
-        const newEmployee = {
-          id: createEmployeeId(),
-          status: "active",
-          ...employee,
-        };
+      loading,
+      error,
+      refreshEmployees,
+      addEmployee: async (employee) => {
+        const token = window.localStorage.getItem("token");
 
-        setEmployees((currentEmployees) => [...currentEmployees, newEmployee]);
-        return newEmployee;
+        if (!token) {
+          throw new Error("Please login again");
+        }
+
+        const response = await axios.post(
+          `${EMPLOYEE_API_URL}/add`,
+          employee,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        if (!response.data.success) {
+          throw new Error("Failed to save employee");
+        }
+
+        setEmployees((currentEmployees) => [
+          response.data.employee,
+          ...currentEmployees,
+        ]);
+        setError("");
+        return response.data.employee;
       },
+      clearError: () => setError(""),
     }),
-    [employees],
+    [employees, loading, error],
   );
 
   return (

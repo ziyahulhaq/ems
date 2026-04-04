@@ -4,7 +4,7 @@ import { useEmployees } from "../../Context/useEmployees";
 import "./Employee.css";
 
 const List = () => {
-  const { employees } = useEmployees();
+  const { employees, loading, error } = useEmployees();
   const activeEmployees = employees.filter(
     (employee) => employee.status === "active",
   ).length;
@@ -43,7 +43,19 @@ const List = () => {
         </div>
       </div>
 
-      {employees.length > 0 ? (
+      {loading ? (
+        <div className="employee-empty-state">
+          <h2 className="employee-empty-state__title">Loading employees...</h2>
+          <p className="employee-empty-state__text">
+            Fetching the latest team records from the database.
+          </p>
+        </div>
+      ) : error ? (
+        <div className="employee-empty-state">
+          <h2 className="employee-empty-state__title">Unable to load employees</h2>
+          <p className="employee-empty-state__text">{error}</p>
+        </div>
+      ) : employees.length > 0 ? (
         <div className="employee-table-wrap">
           <table className="employee-table">
             <thead>
@@ -58,8 +70,8 @@ const List = () => {
             </thead>
             <tbody>
               {employees.map((employee) => (
-                <tr key={employee.id}>
-                  <td data-label="Id">{employee.id}</td>
+                <tr key={employee._id}>
+                  <td data-label="Id">{employee.employeeId}</td>
                   <td data-label="Name">{employee.name}</td>
                   <td data-label="Email">{employee.email}</td>
                   <td data-label="Department">{employee.department}</td>

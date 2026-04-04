@@ -5,7 +5,7 @@ import "./Employee.css";
 
 const Add = () => {
   const navigate = useNavigate();
-  const { addEmployee } = useEmployees();
+  const { addEmployee, clearError } = useEmployees();
   const [employee, setEmployee] = useState({
     name: "",
     email: "",
@@ -13,6 +13,8 @@ const Add = () => {
     role: "",
     notes: "",
   });
+  const [isSaving, setIsSaving] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -22,7 +24,7 @@ const Add = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const payload = {
@@ -38,17 +40,26 @@ const Add = () => {
       return;
     }
 
-    addEmployee(payload);
+    try {
+      setIsSaving(true);
+      setSubmitError("");
+      clearError();
+      await addEmployee(payload);
 
-    setEmployee({
-      name: "",
-      email: "",
-      department: "",
-      role: "",
-      notes: "",
-    });
+      setEmployee({
+        name: "",
+        email: "",
+        department: "",
+        role: "",
+        notes: "",
+      });
 
-    navigate("/admin-dashboard/department/employees");
+      navigate("/admin-dashboard/department/employees");
+    } catch (error) {
+      setSubmitError(error.response?.data?.error || error.message || "Failed to add employee");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -136,9 +147,11 @@ const Add = () => {
           />
         </label>
 
-        <button className="employee-form__button" type="submit">
-          Add Employee
+        <button className="employee-form__button" type="submit" disabled={isSaving}>
+          {isSaving ? "Saving..." : "Add Employee"}
         </button>
+
+        {submitError ? <p className="employee-form__error">{submitError}</p> : null}
       </form>
     </section>
   );

@@ -25,6 +25,7 @@ function Login() {
 
       if (response.data.success) {
         localStorage.setItem("token", response.data.token);
+        window.dispatchEvent(new Event("auth-changed"));
         login(response.data.user);
 
         if (response.data.user.role === "admin") {

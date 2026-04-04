@@ -210,6 +210,12 @@
   cursor: pointer;
 }
 
+.employee-form__error {
+  margin-top: 0.8rem;
+  color: #b42318;
+  font-size: 0.95rem;
+}
+
 .employee-empty-state {
   padding: 1.5rem;
   border-radius: 24px;

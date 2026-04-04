@@ -46,6 +46,7 @@ const AuthContext = ({ children }) => {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("token");
+    window.dispatchEvent(new Event("auth-changed"));
     navigate("/login");
   };
 
