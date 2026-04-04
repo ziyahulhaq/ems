@@ -7,6 +7,12 @@ import axios from "axios";
 const DepartmentList = () => {
   const [departments, setDepartments] = useState([]);
   const [depLoading, setDepLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const normalizedSearchTerm = searchTerm.trim().toLowerCase();
+  const filteredDepartments = departments.filter((department) =>
+    department.dep_name?.toLowerCase().includes(normalizedSearchTerm),
+  );
 
   const onDepartmentDelete = (id) => {
     setDepartments((currentDepartments) =>
@@ -46,7 +52,9 @@ const DepartmentList = () => {
       ) : (
         <div className="department-list">
           <div className="department-list__header">
-            <h3 className="department-list__title">Manage Departments</h3>
+            <div>
+              <h3 className="department-list__title">Manage Departments</h3>
+            </div>
           </div>
 
           <div className="department-list__controls">
@@ -54,6 +62,8 @@ const DepartmentList = () => {
               className="department-list__search"
               type="text"
               placeholder="Search by department name"
+              value={searchTerm}
+              onChange={(event) => setSearchTerm(event.target.value)}
             />
             <Link
               className="department-list__button"
@@ -72,12 +82,12 @@ const DepartmentList = () => {
                 </tr>
               </thead>
               <tbody>
-                {departments.length > 0 ? (
-                  departments.map((department, index) => (
+                {filteredDepartments.length > 0 ? (
+                  filteredDepartments.map((department, index) => (
                     <tr key={department._id}>
-                      <td>{index + 1}</td>
-                      <td>{department.dep_name}</td>
-                      <td>
+                      <td data-label="S No">{index + 1}</td>
+                      <td data-label="Department Name">{department.dep_name}</td>
+                      <td data-label="Action">
                         <DepartmentButtons
                           DepId={department._id}
                           onDepartmentDelete={onDepartmentDelete}
@@ -87,7 +97,11 @@ const DepartmentList = () => {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="3">No departments found.</td>
+                    <td colSpan="3">
+                      {normalizedSearchTerm
+                        ? "No departments match your search."
+                        : "No departments found."}
+                    </td>
                   </tr>
                 )}
               </tbody>

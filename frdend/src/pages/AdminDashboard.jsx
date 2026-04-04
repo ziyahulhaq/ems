@@ -1,17 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AdminSideBar from "../components/AdminSideBar";
 import Navbar from "../components/Dashboard/Navbar";
 import "./AdminDashboard.css";
-import { Outlet, useLocation } from "react-router-dom";
-
+import { Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    setIsSidebarOpen(false);
-  }, [location.pathname]);
 
   return (
     <div className="admin-dashboard">

@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock, FaShieldAlt, FaUsers, FaArrowRight } from "react-icons/fa";
 import "./login.css";
 import axios from "axios";
-import { useAuth } from "../Context/authContext";
+import { useAuth } from "../Context/useAuth";
+import ThemeToggle from "../components/ThemeToggle";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -76,11 +77,16 @@ function Login() {
 
         <section className="login-card" aria-label="Login form">
           <div className="login-card__header">
-            <p className="login-card__eyebrow">Employee Management System</p>
-            <h2 className="login-card__title">Welcome back</h2>
-            <p className="login-card__subtitle">
-              Sign in to access your dashboard and team tools.
-            </p>
+            <div className="login-card__header-top">
+              <div>
+                <p className="login-card__eyebrow">Employee Management System</p>
+                <h2 className="login-card__title">Welcome back</h2>
+                <p className="login-card__subtitle">
+                  Sign in to access your dashboard and team tools.
+                </p>
+              </div>
+              <ThemeToggle className="login-card__theme-toggle" />
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="login-form">

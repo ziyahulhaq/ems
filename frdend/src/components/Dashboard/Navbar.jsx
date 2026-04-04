@@ -1,5 +1,6 @@
-import { useAuth } from "../../Context/authContext";
+import { useAuth } from "../../Context/useAuth";
 import { FaBars } from "react-icons/fa";
+import ThemeToggle from "../ThemeToggle";
 import "./Navbar.css";
 
 const Navbar = ({ onMenuClick }) => {
@@ -34,6 +35,7 @@ const Navbar = ({ onMenuClick }) => {
       </div>
 
       <div className="dashboard-navbar__actions">
+        <ThemeToggle />
         <div className="dashboard-navbar__user">
           <div className="dashboard-navbar__avatar" aria-hidden="true">
             {initials}

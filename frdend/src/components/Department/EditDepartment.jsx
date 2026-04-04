@@ -11,6 +11,7 @@ const EditDepartment = () => {
     description: "",
   });
   const [depLoading, setDepLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const fetchDepartment = async () => {
@@ -25,10 +26,14 @@ const EditDepartment = () => {
           },
         );
         if (response.data.success) {
-          setDepartment(response.data.department);
+          setDepartment({
+            dep_name: response.data.department?.dep_name || "",
+            description: response.data.department?.description || "",
+          });
         }
       } catch (err) {
-        const message = err.response?.data?.error || "Failed to add department";
+        const message =
+          err.response?.data?.error || "Failed to load department";
         alert(message);
       } finally {
         setDepLoading(false);
@@ -49,11 +54,21 @@ const EditDepartment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const payload = {
+      dep_name: department.dep_name.trim(),
+      description: department.description.trim(),
+    };
+
+    if (!payload.dep_name) {
+      alert("Department name is required");
+      return;
+    }
 
     try {
+      setIsSubmitting(true);
       const response = await axios.put(
         `http://localhost:3444/api/department/${id}`,
-        department,
+        payload,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -67,6 +82,8 @@ const EditDepartment = () => {
     } catch (err) {
       const message = err.response?.data?.error || "Failed to update department";
       alert(message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -96,6 +113,7 @@ const EditDepartment = () => {
               onChange={handleChange}
               type="text"
               placeholder="Enter department name"
+              required
             />
           </div>
 
@@ -111,11 +129,15 @@ const EditDepartment = () => {
               onChange={handleChange}
               placeholder="Write a short description..."
               rows="5"
-            ></textarea>
+            />
           </div>
 
-          <button className="add-department__button" type="submit">
-            Edit Department
+          <button
+            className="add-department__button"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Saving..." : "Edit Department"}
           </button>
         </form>
       </div>

@@ -12,7 +12,7 @@ import "./AdminSideBar.css";
 
 const navItems = [
   { label: "Dashboard", to: "/admin-dashboard", icon: FaChartPie },
-  { label: "Employees", to: "/admin-dashboard/employees", icon: FaUserFriends },
+  { label: "Employees", to: "/admin-dashboard/department/employees", icon: FaUserFriends },
   { label: "Add Employee", to: "/admin-dashboard/add-new-employee", icon: FaPlusCircle },
   { label: "Departments", to: "/admin-dashboard/departments", icon: FaBuilding },
   { label: "Leave Management", to: "/admin-dashboard/leaves", icon: FaUserTimes },

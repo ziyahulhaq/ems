@@ -8,20 +8,34 @@ const AddDepartment = () => {
     dep_name: "",
     description: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setDepartment({ ...department, [name]: value });
+    setDepartment((currentDepartment) => ({
+      ...currentDepartment,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const payload = {
+      dep_name: department.dep_name.trim(),
+      description: department.description.trim(),
+    };
+
+    if (!payload.dep_name) {
+      alert("Department name is required");
+      return;
+    }
 
     try {
+      setIsSubmitting(true);
       const response = await axios.post(
         "http://localhost:3444/api/department/add",
-        department,
+        payload,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -29,12 +43,14 @@ const AddDepartment = () => {
         },
       );
 
-      if (response.data.success) {
+      if (response.data.success && response.data.department?._id) {
         navigate("/admin-dashboard/departments");
       }
     } catch (err) {
       const message = err.response?.data?.error || "Failed to add department";
       alert(message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -62,6 +78,7 @@ const AddDepartment = () => {
               onChange={handleChange}
               type="text"
               placeholder="Enter department name"
+              required
             />
           </div>
 
@@ -77,11 +94,15 @@ const AddDepartment = () => {
               onChange={handleChange}
               placeholder="Write a short description..."
               rows="5"
-            ></textarea>
+            />
           </div>
 
-          <button className="add-department__button" type="submit">
-            Add Department
+          <button
+            className="add-department__button"
+            type="submit"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Adding..." : "Add Department"}
           </button>
         </form>
       </div>
