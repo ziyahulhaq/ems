@@ -5,6 +5,16 @@
   padding: clamp(1rem, 2.6vw, 2rem);
   display: grid;
   place-items: center;
+  position: relative;
+}
+
+.login-page__theme-toggle {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: auto;
+  justify-content: flex-start;
+  z-index: 20;
 }
 
 .login-shell {
@@ -145,17 +155,6 @@
   margin-bottom: 1.6rem;
 }
 
-.login-card__header-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.login-card__theme-toggle {
-  flex: 0 0 auto;
-}
-
 .login-card__eyebrow {
   margin: 0 0 0.5rem;
   color: var(--accent-strong);
@@ -292,6 +291,10 @@
 }
 
 @media (max-width: 920px) {
+  .login-page {
+    padding-top: 5rem;
+  }
+
   .login-shell {
     grid-template-columns: 1fr;
   }
@@ -309,6 +312,12 @@
 @media (max-width: 640px) {
   .login-page {
     padding: 0.85rem;
+    padding-top: 5rem;
+  }
+
+  .login-page__theme-toggle {
+    top: 0.9rem;
+    right: 0.9rem;
   }
 
   .login-hero,
@@ -322,13 +331,5 @@
 
   .login-card {
     padding: 1.25rem;
-  }
-
-  .login-card__header-top {
-    flex-direction: column;
-  }
-
-  .login-card__theme-toggle {
-    width: 100%;
   }
 }

@@ -45,6 +45,7 @@ function Login() {
 
   return (
     <div className="login-page">
+      <ThemeToggle className="login-page__theme-toggle" />
       <div className="login-shell">
         <section className="login-hero">
           <div className="login-hero__badge">
@@ -77,15 +78,12 @@ function Login() {
 
         <section className="login-card" aria-label="Login form">
           <div className="login-card__header">
-            <div className="login-card__header-top">
-              <div>
-                <p className="login-card__eyebrow">Employee Management System</p>
-                <h2 className="login-card__title">Welcome back</h2>
-                <p className="login-card__subtitle">
-                  Sign in to access your dashboard and team tools.
-                </p>
-              </div>
-              <ThemeToggle className="login-card__theme-toggle" />
+            <div>
+              <p className="login-card__eyebrow">Employee Management System</p>
+              <h2 className="login-card__title">Welcome back</h2>
+              <p className="login-card__subtitle">
+                Sign in to access your dashboard and team tools.
+              </p>
             </div>
           </div>
 
