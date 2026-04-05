@@ -4,7 +4,8 @@ const jwt = require("jsonwebtoken");
 
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const email = req.body.email?.trim().toLowerCase();
+    const { password } = req.body;
 
     if (!email || !password) {
       return res
@@ -14,7 +15,9 @@ const login = async (req, res) => {
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(404).json({ success: false, error: "User not found" });
+      return res
+        .status(401)
+        .json({ success: false, error: "Invalid email or password" });
     }
 
     if (!user.password) {
@@ -25,7 +28,9 @@ const login = async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(401).json({ success: false, error: "Wrong password" });
+      return res
+        .status(401)
+        .json({ success: false, error: "Invalid email or password" });
     }
 
     if (!process.env.JWT_KEY) {
@@ -44,7 +49,13 @@ const login = async (req, res) => {
       .json({
         success: true,
         token,
-        user: { _id: user._id, name: user.name, role: user.role },
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          profileImage: user.profileImage,
+        },
       });
   } catch (error) {
     console.log(error.message);
@@ -52,8 +63,8 @@ const login = async (req, res) => {
   }
 };
 
-const verify = (req,res) =>{
-  return res.status(200).json({success : true , user : req.user})
-}
+const verify = (req, res) => {
+  return res.status(200).json({ success: true, user: req.user });
+};
 
 module.exports = { login, verify };
