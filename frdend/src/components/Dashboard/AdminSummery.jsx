@@ -40,6 +40,7 @@ const AdminSummery = () => {
             number={"$234"}
             iconColor="#ffffff"
             iconBg="#22c55e"
+            to="/admin-dashboard/salary"
           />
         </div>
       </section>

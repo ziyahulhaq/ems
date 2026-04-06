@@ -81,6 +81,58 @@ const EmployeeProvider = ({ children }) => {
         setError("");
         return response.data.employee;
       },
+      updateEmployee: async (employeeId, updates) => {
+        const token = window.localStorage.getItem("token");
+
+        if (!token) {
+          throw new Error("Please login again");
+        }
+
+        const response = await axios.patch(
+          `${EMPLOYEE_API_URL}/${employeeId}`,
+          updates,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        if (!response.data.success) {
+          throw new Error("Failed to update employee");
+        }
+
+        setEmployees((currentEmployees) =>
+          currentEmployees.map((employee) =>
+            employee._id === employeeId ? response.data.employee : employee,
+          ),
+        );
+        setError("");
+        return response.data.employee;
+      },
+      deleteEmployee: async (employeeId) => {
+        const token = window.localStorage.getItem("token");
+
+        if (!token) {
+          throw new Error("Please login again");
+        }
+
+        const response = await axios.delete(`${EMPLOYEE_API_URL}/${employeeId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (!response.data.success) {
+          throw new Error("Failed to delete employee");
+        }
+
+        setEmployees((currentEmployees) =>
+          currentEmployees.filter((employee) => employee._id !== employeeId),
+        );
+        setError("");
+        return response.data;
+      },
       clearError: () => setError(""),
     }),
     [employees, loading, error],

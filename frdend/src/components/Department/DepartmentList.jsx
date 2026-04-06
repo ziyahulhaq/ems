@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import "./DepartmentList.css";
 import { DepartmentButtons } from "../../utils/DepartmentHelper";
 import axios from "axios";
+import { useAuth } from "../../Context/useAuth";
 
 const DepartmentList = () => {
+  const { user } = useAuth();
+  const isReadOnly = user?.role !== "admin";
   const [departments, setDepartments] = useState([]);
   const [depLoading, setDepLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
@@ -65,12 +68,16 @@ const DepartmentList = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Link
-              className="department-list__button"
-              to="/admin-dashboard/add-department"
-            >
-              Add New Department
-            </Link>
+            {isReadOnly ? (
+              <div className="department-list__readonly">Read only access</div>
+            ) : (
+              <Link
+                className="department-list__button"
+                to="/admin-dashboard/add-department"
+              >
+                Add New Department
+              </Link>
+            )}
           </div>
           <div className="department-list__table-wrap">
             <table className="department-list__table">
@@ -91,6 +98,7 @@ const DepartmentList = () => {
                         <DepartmentButtons
                           DepId={department._id}
                           onDepartmentDelete={onDepartmentDelete}
+                          readOnly={isReadOnly}
                         />
                       </td>
                     </tr>

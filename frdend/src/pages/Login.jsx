@@ -28,12 +28,7 @@ function Login() {
         window.dispatchEvent(new Event("auth-changed"));
         login(response.data.user);
 
-        if (response.data.user.role === "admin") {
-          navigate("/admin-dashboard");
-          return;
-        }
-
-        navigate("/employee-dashboard");
+        navigate("/admin-dashboard");
       }
     } catch (err) {
       if (err.response?.data?.error) {

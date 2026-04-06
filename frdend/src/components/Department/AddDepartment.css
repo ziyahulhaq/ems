@@ -43,6 +43,15 @@
   gap: 1.1rem;
 }
 
+.add-department__fieldset {
+  display: grid;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
 .add-department__field {
   display: grid;
   gap: 0.5rem;
@@ -110,6 +119,16 @@
 .add-department__button:disabled {
   cursor: wait;
   opacity: 0.75;
+}
+
+.add-department__readonly {
+  margin: 0 0 1rem;
+  padding: 0.95rem 1rem;
+  border-radius: 20px;
+  background: var(--surface-gradient-soft);
+  box-shadow: var(--shadow-inset);
+  color: var(--ink-soft);
+  line-height: 1.7;
 }
 
 @media (max-width: 640px) {

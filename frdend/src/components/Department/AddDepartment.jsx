@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import "./AddDepartment.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/useAuth";
 
 const AddDepartment = () => {
+  const { user } = useAuth();
+  const isReadOnly = user?.role !== "admin";
   const [department, setDepartment] = useState({
     dep_name: "",
     description: "",
@@ -21,6 +24,11 @@ const AddDepartment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isReadOnly) {
+      return;
+    }
+
     const payload = {
       dep_name: department.dep_name.trim(),
       description: department.description.trim(),
@@ -65,7 +73,14 @@ const AddDepartment = () => {
           </p>
         </div>
 
+        {isReadOnly ? (
+          <p className="add-department__readonly">
+            Employees can view this page, but only admins can create departments.
+          </p>
+        ) : null}
+
         <form onSubmit={handleSubmit} className="add-department__form">
+          <fieldset className="add-department__fieldset" disabled={isReadOnly}>
           <div className="add-department__field">
             <label className="add-department__label" htmlFor="dep_name">
               Department Name
@@ -96,13 +111,14 @@ const AddDepartment = () => {
               rows="5"
             />
           </div>
+          </fieldset>
 
           <button
             className="add-department__button"
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || isReadOnly}
           >
-            {isSubmitting ? "Adding..." : "Add Department"}
+            {isReadOnly ? "Read Only" : isSubmitting ? "Adding..." : "Add Department"}
           </button>
         </form>
       </div>

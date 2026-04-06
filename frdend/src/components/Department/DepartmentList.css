@@ -73,6 +73,19 @@
   background: var(--button-gradient-hover);
 }
 
+.department-list__readonly {
+  display: inline-flex;
+  align-items: center;
+  min-height: 54px;
+  padding: 0.8rem 1.15rem;
+  border-radius: 20px;
+  background: var(--surface-gradient-soft);
+  box-shadow: var(--shadow-inset);
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
 .department-list__table-wrap {
   margin-top: 1rem;
   overflow-x: auto;
@@ -132,6 +145,13 @@
 .department-actions__button:hover {
   transform: translateY(-1px);
   filter: brightness(1.01);
+}
+
+.department-actions__button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  transform: none;
+  filter: none;
 }
 
 .department-actions__button--edit {
