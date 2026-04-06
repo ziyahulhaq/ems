@@ -6,13 +6,12 @@ import {
   FaUserFriends,
   FaUserTimes,
 } from "react-icons/fa";
-import { IoMdSettings } from "react-icons/io";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../Context/useAuth";
 import "./AdminSideBar.css";    
 
 const navItems = [
-  { label: "Dashboard", to: "/admin-dashboard", icon: FaChartPie, roles: ["admin", "employee"] },
+  { label: "Dashboard", to: "/admin-dashboard", icon: FaChartPie, roles: ["admin"] },
   {
     label: "Employees",
     to: "/admin-dashboard/department/employees",
@@ -38,7 +37,6 @@ const navItems = [
     roles: ["admin", "employee"],
   },
   { label: "Salary", to: "/admin-dashboard/salary", icon: FaDollarSign, roles: ["admin", "employee"] },
-  { label: "Settings", to: "/admin-dashboard/Settings", icon: IoMdSettings, roles: ["admin"] },
 ];
 
 const AdminSideBar = ({ isOpen, closeSidebar }) => {

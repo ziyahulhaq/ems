@@ -1,7 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import AuthContext from "./Context/authContext";
 import { EmployeeProvider } from "./Context/EmployeeContext.jsx";
-import FeaturePlaceholder from "./components/admin/FeaturePlaceholder.jsx";
 import AdminSummery from "./components/Dashboard/AdminSummery";
 import AddDepartment from "./components/Department/AddDepartment.jsx";
 import DepartmentList from "./components/Department/DepartmentList.jsx";
@@ -9,6 +8,7 @@ import EditDepartment from "./components/Department/EditDepartment.jsx";
 import AddEmployee from "./components/employee/Add.jsx";
 import EditEmployee from "./components/employee/Edit.jsx";
 import EmployeeList from "./components/employee/List.jsx";
+import LeaveManagement from "./components/leave/LeaveManagement.jsx";
 import Salary from "./components/employee/Salary.jsx";
 import AdminDashboard from "./pages/AdminDashboard";
 import Login from "./pages/Login";
@@ -56,33 +56,14 @@ function App() {
               <Route path="department/employees" element={<EmployeeList />} />
               <Route path="employees/:id/edit" element={<EditEmployee />} />
               <Route path="salary" element={<Salary />} />
-              <Route
-                path="leaves"
-                element={
-                  <FeaturePlaceholder
-                    eyebrow="Leave Management"
-                    title="Leave workspace coming soon"
-                    description="This section is available in the sidebar now, and we can build the full leave workflow next."
-                  />
-                }
-              />
-              <Route
-                path="settings"
-                element={
-                  <FeaturePlaceholder
-                    eyebrow="Settings"
-                    title="Settings workspace coming soon"
-                    description="The settings route is now stable and no longer leads to a missing page."
-                  />
-                }
-              />
+              <Route path="leaves" element={<LeaveManagement />} />
             </Route>
 
             <Route
               path="/employee-dashboard"
               element={
                 <PrivateRoutes>
-                  <Navigate to="/admin-dashboard" replace />
+                  <Navigate to="/admin-dashboard/leaves" replace />
                 </PrivateRoutes>
               }
             />

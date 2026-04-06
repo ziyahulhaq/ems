@@ -4,6 +4,7 @@ const connectToDatabase = require("./db/db.js")
 const authRouter = require("./routes/auth.js")
 const departmentRouter = require("./routes/department.js")
 const employeeRouter = require("./routes/employee.js")
+const leaveRouter = require("./routes/leave.js")
 
 const app = express()
 app.use(cors())
@@ -11,6 +12,7 @@ app.use(express.json({ limit: "10mb" }))
 app.use('/api/auth',authRouter)
 app.use('/api/department', departmentRouter)
 app.use('/api/employee', employeeRouter)
+app.use('/api/leave', leaveRouter)
 
 
 const startServer = async () => {
