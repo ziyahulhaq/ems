@@ -5,6 +5,7 @@ import "./Navbar.css";
 
 const Navbar = ({ onMenuClick }) => {
   const { user, logout } = useAuth();
+  const accessLabel = user?.role === "admin" ? "Full access" : "Read only";
   const initials = user?.name
     ? user.name
         .split(" ")
@@ -41,7 +42,7 @@ const Navbar = ({ onMenuClick }) => {
             {initials}
           </div>
           <div className="dashboard-navbar__meta">
-            <span className="dashboard-navbar__label">Signed in as</span>
+            <span className="dashboard-navbar__label">{accessLabel}</span>
             <strong>{user?.role || "Member"}</strong>
           </div>
         </div>

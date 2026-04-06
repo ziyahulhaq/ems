@@ -8,7 +8,8 @@ import {
 } from "react-icons/fa";
 import { IoMdSettings } from "react-icons/io";
 import { Link, useLocation } from "react-router-dom";
-import "./AdminSideBar.css";    
+import { useAuth } from "../Context/useAuth";
+import "./AdminSideBar.css";
 
 const navItems = [
   { label: "Dashboard", to: "/admin-dashboard", icon: FaChartPie },
@@ -22,6 +23,8 @@ const navItems = [
 
 const AdminSideBar = ({ isOpen, closeSidebar }) => {
   const location = useLocation();
+  const { user } = useAuth();
+  const isReadOnly = user?.role !== "admin";
 
   return (
     <aside
@@ -36,7 +39,9 @@ const AdminSideBar = ({ isOpen, closeSidebar }) => {
         </div>
       </div>
 
-      <div className="admin-sidebar__status">System Online</div>
+      <div className="admin-sidebar__status">
+        {isReadOnly ? "Read Only Access" : "System Online"}
+      </div>
 
       <nav className="admin-sidebar__nav">
         {navItems.map((item) => {

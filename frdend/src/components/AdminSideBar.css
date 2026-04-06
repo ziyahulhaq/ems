@@ -2,37 +2,38 @@
   z-index: 40;
   position: sticky;
   top: 0;
-  flex: 0 0 19rem;
-  width: 19rem;
-  height: calc(100vh - 2rem);
-  margin: 1rem 0 1rem 1rem;
+  flex: 0 0 17rem;
+  width: 17rem;
+  height: calc(100vh - 1.5rem);
+  margin: 0.75rem 0 0.75rem 0.75rem;
   padding-bottom: 0.5rem;
   overflow: hidden auto;
-  border-radius: 34px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
   background: var(--surface-gradient);
-  box-shadow: var(--shadow-raised);
+  box-shadow: none;
   color: var(--ink);
 }
 
 .admin-sidebar__brand {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1.45rem 1.35rem 1.15rem;
+  gap: 0.85rem;
+  padding: 1.2rem 1rem 1rem;
 }
 
 .admin-sidebar__logo {
   display: grid;
   place-items: center;
-  width: 3.25rem;
-  height: 3.25rem;
-  border-radius: 20px;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
   background: var(--avatar-gradient);
-  box-shadow: var(--shadow-raised-soft);
-  color: var(--accent-strong);
-  font-size: 0.98rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .admin-sidebar__title {
@@ -45,7 +46,7 @@
   margin-top: 0.28rem;
   color: var(--ink-soft);
   font-size: 0.8rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
@@ -53,79 +54,67 @@
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  margin: 0 1.35rem 0.35rem;
-  padding: 0.7rem 0.95rem;
+  margin: 0 1rem 0.4rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--pill-gradient);
-  box-shadow: var(--shadow-inset);
-  color: var(--accent-strong);
+  color: var(--ink-soft);
   font-size: 0.76rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .admin-sidebar__status::before {
   content: "";
-  width: 0.65rem;
-  height: 0.65rem;
+  width: 0.5rem;
+  height: 0.5rem;
   border-radius: 999px;
   background: var(--status-dot);
-  box-shadow: 0 0 0 5px rgba(184, 234, 223, 0.42);
 }
 
 .admin-sidebar__nav {
   display: grid;
-  gap: 0.8rem;
-  padding: 1rem 1rem 1.25rem;
+  gap: 0.4rem;
+  padding: 0.85rem;
 }
 
 .admin-sidebar__link {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  padding: 0.95rem 1rem;
-  border-radius: 22px;
-  background: var(--surface-gradient-soft);
-  box-shadow: var(--shadow-raised-soft);
+  gap: 0.75rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
   color: var(--ink-soft);
   text-decoration: none;
-  font-size: 0.96rem;
-  font-weight: 700;
-  transition:
-    color 160ms ease,
-    box-shadow 160ms ease,
-    transform 160ms ease,
-    background 160ms ease;
+  font-size: 0.94rem;
+  font-weight: 600;
+  transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
 }
 
 .admin-sidebar__link:hover {
   color: var(--ink);
-  transform: translateY(-1px);
+  background: rgba(17, 24, 39, 0.03);
 }
 
 .admin-sidebar__link--active {
   background: var(--accent-soft);
-  box-shadow:
-    inset 7px 7px 16px rgba(195, 206, 222, 0.78),
-    inset -7px -7px 16px rgba(255, 255, 255, 0.92);
+  border-color: rgba(37, 99, 235, 0.14);
   color: var(--accent-strong);
 }
 
 .admin-sidebar__icon {
   flex: 0 0 auto;
-  width: 2.35rem;
-  height: 2.35rem;
-  padding: 0.65rem;
-  border-radius: 16px;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.45rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
   background: var(--avatar-gradient);
-  box-shadow: var(--shadow-raised-soft);
-  color: var(--accent);
-  transition: transform 160ms ease, color 160ms ease;
-}
-
-.admin-sidebar__link:hover .admin-sidebar__icon {
-  transform: scale(1.04);
+  color: var(--ink-soft);
 }
 
 .admin-sidebar__icon--active {
@@ -141,7 +130,7 @@
   .admin-sidebar {
     position: fixed;
     inset: 0 auto 0 0;
-    width: min(84vw, 20rem);
+    width: min(84vw, 18rem);
     height: calc(100svh - 1.4rem);
     margin: 0.7rem;
   }

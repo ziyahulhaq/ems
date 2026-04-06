@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./AddDepartment.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../Context/useAuth";
 
 const AddDepartment = () => {
   const [department, setDepartment] = useState({
@@ -10,6 +11,7 @@ const AddDepartment = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,6 +55,22 @@ const AddDepartment = () => {
       setIsSubmitting(false);
     }
   };
+
+  if (user?.role !== "admin") {
+    return (
+      <div className="add-department">
+        <div className="add-department__card">
+          <div className="add-department__header">
+            <p className="add-department__eyebrow">Department setup</p>
+            <h3 className="add-department__title">Read-only section</h3>
+            <p className="add-department__subtitle">
+              Employees can open this page from the sidebar, but only admins can add departments.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="add-department">

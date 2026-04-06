@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../../Context/useAuth";
 import "./AddDepartment.css";
 
 const EditDepartment = () => {
@@ -12,6 +13,7 @@ const EditDepartment = () => {
   });
   const [depLoading, setDepLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchDepartment = async () => {
@@ -89,6 +91,46 @@ const EditDepartment = () => {
 
   return depLoading ? (
     <div>Loading ...</div>
+  ) : user?.role !== "admin" ? (
+    <div className="add-department">
+      <div className="add-department__card">
+        <div className="add-department__header">
+          <p className="add-department__eyebrow">Department setup</p>
+          <h3 className="add-department__title">Read-only section</h3>
+          <p className="add-department__subtitle">
+            Employees can view department pages, but only admins can edit them.
+          </p>
+        </div>
+
+        <div className="add-department__form">
+          <div className="add-department__field">
+            <label className="add-department__label" htmlFor="dep_name_readonly">
+              Department Name
+            </label>
+            <input
+              className="add-department__input"
+              id="dep_name_readonly"
+              value={department.dep_name}
+              type="text"
+              readOnly
+            />
+          </div>
+
+          <div className="add-department__field">
+            <label className="add-department__label" htmlFor="description_readonly">
+              Description
+            </label>
+            <textarea
+              className="add-department__textarea"
+              id="description_readonly"
+              value={department.description}
+              readOnly
+              rows="5"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   ) : (
     <div className="add-department">
       <div className="add-department__card">

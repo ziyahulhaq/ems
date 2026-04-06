@@ -6,11 +6,12 @@ import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminSummery from "./components/Dashboard/AdminSummery";
 import DepartmentList from "./components/Department/DepartmentList";
-import EmployeeDashboard from "./pages/EmployeeDashboard";
 import AddDepartment from "./components/Department/AddDepartment.jsx";
 import EditDepartment from "./components/Department/EditDepartment.jsx";
 import List from "./components/employee/List.jsx";
 import Add from "./components/employee/Add.jsx";
+import Edit from "./components/employee/Edit.jsx";
+import Salary from "./components/employee/Salary.jsx";
 import { ThemeProvider } from "./Context/ThemeContext.jsx";
 import { EmployeeProvider } from "./Context/EmployeeContext.jsx";
 
@@ -43,7 +44,7 @@ function App() {
                 path="/admin-dashboard"
                 element={
                   <PrivateRoutes>
-                    <RoleBasedRoutes requiredRole={["admin"]}>
+                    <RoleBasedRoutes requiredRole={["admin", "employee"]}>
                       <AdminDashboard />
                     </RoleBasedRoutes>
                   </PrivateRoutes>
@@ -55,12 +56,14 @@ function App() {
                 <Route path="/admin-dashboard/department/:id" element={<EditDepartment />} />
                 <Route path="/admin-dashboard/add-new-employee" element={<Add />} />
                 <Route path="/admin-dashboard/department/employees" element={<List />} />
+                <Route path="/admin-dashboard/employees/:id/edit" element={<Edit />} />
+                <Route path="/admin-dashboard/salary" element={<Salary />} />
               </Route>
               <Route
                 path="/employee-dashboard"
                 element={
                   <PrivateRoutes>
-                    <EmployeeDashboard />
+                    <Navigate to="/admin-dashboard" replace />
                   </PrivateRoutes>
                 }
               />

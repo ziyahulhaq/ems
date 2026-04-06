@@ -2,9 +2,10 @@
   width: min(100% - 2rem, 1120px);
   margin: 0 auto 1.5rem;
   padding: 1.3rem;
-  border-radius: 30px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
   background: var(--surface-gradient);
-  box-shadow: var(--shadow-raised);
+  box-shadow: none;
 }
 
 .department-list__header {
@@ -31,11 +32,10 @@
 .department-list__search {
   flex: 1;
   min-width: 220px;
-  padding: 0.95rem 1rem;
-  border: 1px solid transparent;
-  border-radius: 20px;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
   background: var(--control-gradient);
-  box-shadow: var(--shadow-inset);
   color: var(--ink);
   outline: none;
   transition: border-color 160ms ease, box-shadow 160ms ease;
@@ -46,40 +46,47 @@
 }
 
 .department-list__search:focus {
-  border-color: rgba(111, 146, 220, 0.28);
-  box-shadow: var(--shadow-inset), var(--ring);
+  border-color: var(--accent);
+  box-shadow: var(--ring);
 }
 
 .department-list__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 54px;
-  padding: 0.8rem 1.15rem;
-  border: 0;
-  border-radius: 20px;
+  min-height: 48px;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--ink);
+  border-radius: 12px;
   background: var(--button-gradient);
-  box-shadow: var(--shadow-raised-soft);
   color: var(--button-text);
   text-decoration: none;
   font-size: 0.92rem;
-  font-weight: 800;
-  transition: transform 160ms ease, filter 160ms ease;
+  font-weight: 700;
 }
 
-.department-list__button:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.02);
-  background: var(--button-gradient-hover);
+.department-list__readonly-badge,
+.department-list__readonly-text {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 
 .department-list__table-wrap {
   margin-top: 1rem;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  border-radius: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
   background: var(--surface-gradient-soft);
-  box-shadow: var(--shadow-inset);
+  box-shadow: none;
 }
 
 .department-list__table {
@@ -96,20 +103,20 @@
 }
 
 .department-list__table thead th {
-  color: var(--accent-strong);
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  border-bottom: 1px solid rgba(116, 137, 165, 0.16);
+  border-bottom: 1px solid var(--line);
 }
 
 .department-list__table tbody tr + tr td {
-  border-top: 1px solid rgba(116, 137, 165, 0.12);
+  border-top: 1px solid var(--line);
 }
 
 .department-list__table tbody tr:hover {
-  background: rgba(255, 255, 255, 0.16);
+  background: rgba(17, 24, 39, 0.03);
 }
 
 .department-actions {
@@ -119,28 +126,20 @@
 }
 
 .department-actions__button {
-  border: 0;
-  border-radius: 16px;
-  padding: 0.65rem 0.9rem;
-  font-size: 0.84rem;
-  font-weight: 800;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.55rem 0.8rem;
+  font-size: 0.82rem;
+  font-weight: 600;
   cursor: pointer;
-  box-shadow: var(--shadow-raised-soft);
-  transition: transform 160ms ease, filter 160ms ease;
-}
-
-.department-actions__button:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.01);
+  background: transparent;
 }
 
 .department-actions__button--edit {
-  background: var(--accent-soft);
   color: var(--accent-strong);
 }
 
 .department-actions__button--delete {
-  background: var(--danger-gradient);
   color: #bb6573;
 }
 
@@ -148,7 +147,7 @@
   .department-list {
     width: min(100% - 1rem, 1120px);
     padding: 1rem;
-    border-radius: 26px;
+    border-radius: 14px;
   }
 
   .department-list__header,
@@ -193,9 +192,10 @@
 
   .department-list__table tbody tr {
     padding: 0.95rem;
-    border-radius: 22px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
     background: var(--surface-gradient);
-    box-shadow: var(--shadow-raised-soft);
+    box-shadow: none;
   }
 
   .department-list__table tbody tr + tr td {

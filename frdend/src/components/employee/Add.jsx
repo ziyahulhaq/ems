@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEmployees } from "../../Context/useEmployees";
+import { useAuth } from "../../Context/useAuth";
 import "./Employee.css";
 
 const Add = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const { addEmployee, clearError } = useEmployees();
   const [employee, setEmployee] = useState({
     name: "",
@@ -61,6 +63,23 @@ const Add = () => {
       setIsSaving(false);
     }
   };
+
+  if (user?.role !== "admin") {
+    return (
+      <section className="employee-shell">
+        <div className="employee-shell__header">
+          <div>
+            <p className="employee-shell__eyebrow">Hiring panel</p>
+            <h1 className="employee-shell__title">Read-only section</h1>
+            <p className="employee-shell__text">
+              Employees can open this page from the sidebar, but only admins can add new employees.
+            </p>
+          </div>
+          <div className="employee-shell__pill">Read only</div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="employee-shell">

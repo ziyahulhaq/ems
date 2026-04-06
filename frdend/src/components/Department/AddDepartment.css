@@ -1,15 +1,16 @@
 .add-department {
   min-height: calc(100vh - 112px);
-  padding: 0 1rem 1.5rem;
+  padding: 0 0.75rem 1.25rem;
 }
 
 .add-department__card {
   width: min(100%, 760px);
   margin: 0 auto;
   padding: clamp(1.25rem, 3vw, 1.95rem);
-  border-radius: 30px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
   background: var(--surface-gradient);
-  box-shadow: var(--shadow-raised);
+  box-shadow: none;
 }
 
 .add-department__header {
@@ -18,10 +19,10 @@
 
 .add-department__eyebrow {
   margin: 0 0 0.45rem;
-  color: var(--accent-strong);
+  color: var(--ink-soft);
   font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -50,25 +51,21 @@
 
 .add-department__label {
   color: var(--ink);
-  font-size: 0.92rem;
-  font-weight: 700;
+  font-size: 0.88rem;
+  font-weight: 600;
 }
 
 .add-department__input,
 .add-department__textarea {
   width: 100%;
-  border: 1px solid transparent;
-  border-radius: 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
   background: var(--control-gradient);
-  box-shadow: var(--shadow-inset);
   color: var(--ink);
   font-size: 1rem;
-  padding: 0.95rem 1rem;
+  padding: 0.85rem 0.95rem;
   outline: none;
-  transition:
-    border-color 160ms ease,
-    box-shadow 160ms ease,
-    background-color 160ms ease;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .add-department__textarea {
@@ -83,28 +80,20 @@
 
 .add-department__input:focus,
 .add-department__textarea:focus {
-  border-color: rgba(111, 146, 220, 0.28);
-  box-shadow: var(--shadow-inset), var(--ring);
+  border-color: var(--accent);
+  box-shadow: var(--ring);
 }
 
 .add-department__button {
   justify-self: start;
-  border: 0;
-  border-radius: 20px;
-  padding: 0.9rem 1.4rem;
+  border: 1px solid var(--ink);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
   background: var(--button-gradient);
-  box-shadow: var(--shadow-raised-soft);
   color: var(--button-text);
   font-size: 0.95rem;
-  font-weight: 800;
+  font-weight: 700;
   cursor: pointer;
-  transition: transform 160ms ease, filter 160ms ease;
-}
-
-.add-department__button:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.02);
-  background: var(--button-gradient-hover);
 }
 
 .add-department__button:disabled {
@@ -119,7 +108,7 @@
 
   .add-department__card {
     padding: 1.15rem;
-    border-radius: 26px;
+    border-radius: 14px;
   }
 
   .add-department__button {

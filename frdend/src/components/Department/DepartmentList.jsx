@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import "./DepartmentList.css";
 import { DepartmentButtons } from "../../utils/DepartmentHelper";
 import axios from "axios";
+import { useAuth } from "../../Context/useAuth";
 
 const DepartmentList = () => {
+  const { user } = useAuth();
   const [departments, setDepartments] = useState([]);
   const [depLoading, setDepLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const isReadOnly = user?.role !== "admin";
 
   const normalizedSearchTerm = searchTerm.trim().toLowerCase();
   const filteredDepartments = departments.filter((department) =>
@@ -65,12 +68,16 @@ const DepartmentList = () => {
               value={searchTerm}
               onChange={(event) => setSearchTerm(event.target.value)}
             />
-            <Link
-              className="department-list__button"
-              to="/admin-dashboard/add-department"
-            >
-              Add New Department
-            </Link>
+            {!isReadOnly ? (
+              <Link
+                className="department-list__button"
+                to="/admin-dashboard/add-department"
+              >
+                Add New Department
+              </Link>
+            ) : (
+              <div className="department-list__readonly-badge">Read only</div>
+            )}
           </div>
           <div className="department-list__table-wrap">
             <table className="department-list__table">
@@ -88,10 +95,16 @@ const DepartmentList = () => {
                       <td data-label="S No">{index + 1}</td>
                       <td data-label="Department Name">{department.dep_name}</td>
                       <td data-label="Action">
-                        <DepartmentButtons
-                          DepId={department._id}
-                          onDepartmentDelete={onDepartmentDelete}
-                        />
+                        {isReadOnly ? (
+                          <span className="department-list__readonly-text">
+                            View only
+                          </span>
+                        ) : (
+                          <DepartmentButtons
+                            DepId={department._id}
+                            onDepartmentDelete={onDepartmentDelete}
+                          />
+                        )}
                       </td>
                     </tr>
                   ))
