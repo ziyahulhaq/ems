@@ -22,6 +22,7 @@ const EmployeeProvider = ({ children }) => {
     try {
       setLoading(true);
       setError("");
+
       const response = await axios.get(EMPLOYEE_API_URL, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -62,15 +63,11 @@ const EmployeeProvider = ({ children }) => {
           throw new Error("Please login again");
         }
 
-        const response = await axios.post(
-          `${EMPLOYEE_API_URL}/add`,
-          employee,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        const response = await axios.post(`${EMPLOYEE_API_URL}/add`, employee, {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        );
+        });
 
         if (!response.data.success) {
           throw new Error("Failed to save employee");
@@ -83,32 +80,26 @@ const EmployeeProvider = ({ children }) => {
         setError("");
         return response.data.employee;
       },
-      updateEmployee: async (employeeId, employee) => {
+      updateEmployee: async (employeeId, updates) => {
         const token = window.localStorage.getItem("token");
 
         if (!token) {
           throw new Error("Please login again");
         }
 
-        const response = await axios.patch(
-          `${EMPLOYEE_API_URL}/${employeeId}`,
-          employee,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+        const response = await axios.patch(`${EMPLOYEE_API_URL}/${employeeId}`, updates, {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
-        );
+        });
 
         if (!response.data.success) {
           throw new Error("Failed to update employee");
         }
 
         setEmployees((currentEmployees) =>
-          currentEmployees.map((currentEmployee) =>
-            currentEmployee._id === employeeId
-              ? response.data.employee
-              : currentEmployee,
+          currentEmployees.map((employee) =>
+            employee._id === employeeId ? response.data.employee : employee,
           ),
         );
         setError("");

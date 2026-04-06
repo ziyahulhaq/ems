@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const DepartmentButtons = ({ DepId, onDepartmentDelete }) => {
+export const DepartmentButtons = ({ DepId, onDepartmentDelete, readOnly = false }) => {
   const navigate = useNavigate();
 
   const handleDelete = async () => {
@@ -32,12 +32,13 @@ export const DepartmentButtons = ({ DepId, onDepartmentDelete }) => {
         type="button"
         onClick={() => navigate(`/admin-dashboard/department/${DepId}`)}
       >
-        Edit
+        {readOnly ? "View" : "Edit"}
       </button>
       <button
         onClick={handleDelete}
         className="department-actions__button department-actions__button--delete"
         type="button"
+        disabled={readOnly}
       >
         Delete
       </button>

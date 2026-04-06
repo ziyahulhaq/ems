@@ -1,77 +1,95 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import AuthContext from "./Context/authContext";
+import { EmployeeProvider } from "./Context/EmployeeContext.jsx";
+import FeaturePlaceholder from "./components/admin/FeaturePlaceholder.jsx";
+import AdminSummery from "./components/Dashboard/AdminSummery";
+import AddDepartment from "./components/Department/AddDepartment.jsx";
+import DepartmentList from "./components/Department/DepartmentList.jsx";
+import EditDepartment from "./components/Department/EditDepartment.jsx";
+import AddEmployee from "./components/employee/Add.jsx";
+import EditEmployee from "./components/employee/Edit.jsx";
+import EmployeeList from "./components/employee/List.jsx";
+import Salary from "./components/employee/Salary.jsx";
+import AdminDashboard from "./pages/AdminDashboard";
+import Login from "./pages/Login";
 import PrivateRoutes from "./utils/PrivateRoutes.jsx";
 import RoleBasedRoutes from "./utils/RoleBasedRoutes.jsx";
-import Login from "./pages/Login";
-import AdminDashboard from "./pages/AdminDashboard";
-import AdminSummery from "./components/Dashboard/AdminSummery";
-import DepartmentList from "./components/Department/DepartmentList";
-import AddDepartment from "./components/Department/AddDepartment.jsx";
-import EditDepartment from "./components/Department/EditDepartment.jsx";
-import List from "./components/employee/List.jsx";
-import Add from "./components/employee/Add.jsx";
-import Edit from "./components/employee/Edit.jsx";
-import Salary from "./components/employee/Salary.jsx";
-import { ThemeProvider } from "./Context/ThemeContext.jsx";
-import { EmployeeProvider } from "./Context/EmployeeContext.jsx";
 
 function App() {
   return (
-    <ThemeProvider>
-      <EmployeeProvider>
-        <BrowserRouter>
-          <AuthContext>
-            <Routes>
-              <Route path="/" element={<Navigate to="/login" replace />} />
-              <Route path="/login" element={<Login />} />
-              <Route
-                path="/unauthorized"
-                element={
-                  <div className="status-screen">
-                    <div className="status-screen__panel">
-                      <p className="status-screen__eyebrow">Access blocked</p>
-                      <h1 className="status-screen__title">Unauthorized</h1>
-                      <p className="status-screen__text">
-                        Your role does not have clearance for this route. Log in with
-                        the right account or head back to your allowed dashboard.
-                      </p>
-                    </div>
+    <EmployeeProvider>
+      <BrowserRouter>
+        <AuthContext>
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/unauthorized"
+              element={
+                <div className="status-screen">
+                  <div className="status-screen__panel">
+                    <p className="status-screen__eyebrow">Access blocked</p>
+                    <h1 className="status-screen__title">Unauthorized</h1>
+                    <p className="status-screen__text">
+                      Your account does not have permission for that route.
+                    </p>
                   </div>
-                }
-              />
+                </div>
+              }
+            />
 
+            <Route
+              path="/admin-dashboard"
+              element={
+                <PrivateRoutes>
+                  <RoleBasedRoutes requiredRole={["admin", "employee"]}>
+                    <AdminDashboard />
+                  </RoleBasedRoutes>
+                </PrivateRoutes>
+              }
+            >
+              <Route index element={<AdminSummery />} />
+              <Route path="departments" element={<DepartmentList />} />
+              <Route path="add-department" element={<AddDepartment />} />
+              <Route path="department/:id" element={<EditDepartment />} />
+              <Route path="add-new-employee" element={<AddEmployee />} />
+              <Route path="department/employees" element={<EmployeeList />} />
+              <Route path="employees/:id/edit" element={<EditEmployee />} />
+              <Route path="salary" element={<Salary />} />
               <Route
-                path="/admin-dashboard"
+                path="leaves"
                 element={
-                  <PrivateRoutes>
-                    <RoleBasedRoutes requiredRole={["admin", "employee"]}>
-                      <AdminDashboard />
-                    </RoleBasedRoutes>
-                  </PrivateRoutes>
-                }
-              >
-                <Route index element={<AdminSummery />} />
-                <Route path="/admin-dashboard/departments" element={<DepartmentList />} />
-                <Route path="/admin-dashboard/add-department" element={<AddDepartment />} />
-                <Route path="/admin-dashboard/department/:id" element={<EditDepartment />} />
-                <Route path="/admin-dashboard/add-new-employee" element={<Add />} />
-                <Route path="/admin-dashboard/department/employees" element={<List />} />
-                <Route path="/admin-dashboard/employees/:id/edit" element={<Edit />} />
-                <Route path="/admin-dashboard/salary" element={<Salary />} />
-              </Route>
-              <Route
-                path="/employee-dashboard"
-                element={
-                  <PrivateRoutes>
-                    <Navigate to="/admin-dashboard" replace />
-                  </PrivateRoutes>
+                  <FeaturePlaceholder
+                    eyebrow="Leave Management"
+                    title="Leave workspace coming soon"
+                    description="This section is available in the sidebar now, and we can build the full leave workflow next."
+                  />
                 }
               />
-            </Routes>
-          </AuthContext>
-        </BrowserRouter>
-      </EmployeeProvider>
-    </ThemeProvider>
+              <Route
+                path="settings"
+                element={
+                  <FeaturePlaceholder
+                    eyebrow="Settings"
+                    title="Settings workspace coming soon"
+                    description="The settings route is now stable and no longer leads to a missing page."
+                  />
+                }
+              />
+            </Route>
+
+            <Route
+              path="/employee-dashboard"
+              element={
+                <PrivateRoutes>
+                  <Navigate to="/admin-dashboard" replace />
+                </PrivateRoutes>
+              }
+            />
+          </Routes>
+        </AuthContext>
+      </BrowserRouter>
+    </EmployeeProvider>
   );
 }
 

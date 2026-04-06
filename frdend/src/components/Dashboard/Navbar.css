@@ -7,8 +7,8 @@
   margin: 0.75rem 0.75rem 1rem;
   border: 1px solid var(--line);
   border-radius: 16px;
-  background: var(--surface-gradient-strong);
-  box-shadow: none;
+  background: var(--surface);
+  box-shadow: var(--shadow-raised-soft);
 }
 
 .dashboard-navbar__left {
@@ -53,7 +53,7 @@
 .dashboard-navbar__button {
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: var(--surface-gradient);
+  background: var(--surface);
   cursor: pointer;
   transition: border-color 160ms ease, background 160ms ease;
 }
@@ -113,6 +113,7 @@
   color: var(--ink);
   font-size: 0.9rem;
   font-weight: 600;
+  background: var(--surface-soft);
 }
 
 @media (max-width: 640px) {

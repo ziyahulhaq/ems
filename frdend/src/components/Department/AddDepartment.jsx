@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/useAuth";
 
 const AddDepartment = () => {
+  const { user } = useAuth();
   const [department, setDepartment] = useState({
     dep_name: "",
     description: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const { user } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +23,7 @@ const AddDepartment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const payload = {
       dep_name: department.dep_name.trim(),
       description: department.description.trim(),

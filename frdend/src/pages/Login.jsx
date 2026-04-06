@@ -4,7 +4,6 @@ import { FaEnvelope, FaLock, FaShieldAlt, FaUsers, FaArrowRight } from "react-ic
 import "./login.css";
 import axios from "axios";
 import { useAuth } from "../Context/useAuth";
-import ThemeToggle from "../components/ThemeToggle";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -28,12 +27,7 @@ function Login() {
         window.dispatchEvent(new Event("auth-changed"));
         login(response.data.user);
 
-        if (response.data.user.role === "admin") {
-          navigate("/admin-dashboard");
-          return;
-        }
-
-        navigate("/employee-dashboard");
+        navigate("/admin-dashboard");
       }
     } catch (err) {
       if (err.response?.data?.error) {
@@ -46,7 +40,6 @@ function Login() {
 
   return (
     <div className="login-page">
-      <ThemeToggle className="login-page__theme-toggle" />
       <div className="login-shell">
         <section className="login-hero">
           <div className="login-hero__badge">
@@ -126,7 +119,7 @@ function Login() {
                 <input type="checkbox" />
                 Remember me
               </label>
-              <a href="#">Forgot password?</a>
+              <span>Contact admin for password help</span>
             </div>
 
             <button className="login-form__button" type="submit">
@@ -135,9 +128,7 @@ function Login() {
 
             {error && <p className="login-form__error">{error}</p>}
 
-            <p className="login-form__footer">
-              Need an account? <a href="/register">Register</a>
-            </p>
+            <p className="login-form__footer">Need an account? Ask an admin to create it.</p>
           </form>
         </section>
       </div>

@@ -28,9 +28,9 @@ const AuthContext = ({ children }) => {
         } else {
           setUser(null);
         }
-      } catch (error) {
-       if (error.response && !error.response.data.error)
-        setUser(null)
+      } catch {
+        setUser(null);
+        localStorage.removeItem("token");
       } finally {
         setLoading(false);
       }
@@ -41,6 +41,7 @@ const AuthContext = ({ children }) => {
   const login = (user) => {
     setUser(user);
     setLoading(false);
+    window.dispatchEvent(new Event("auth-changed"));
   };
 
   const logout = () => {

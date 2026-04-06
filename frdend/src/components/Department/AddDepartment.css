@@ -8,9 +8,9 @@
   margin: 0 auto;
   padding: clamp(1.25rem, 3vw, 1.95rem);
   border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--surface-gradient);
-  box-shadow: none;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-raised-soft);
 }
 
 .add-department__header {
@@ -42,6 +42,15 @@
 .add-department__form {
   display: grid;
   gap: 1.1rem;
+}
+
+.add-department__fieldset {
+  display: grid;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
 }
 
 .add-department__field {
@@ -99,6 +108,17 @@
 .add-department__button:disabled {
   cursor: wait;
   opacity: 0.75;
+}
+
+.add-department__readonly {
+  margin: 0 0 1rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-soft);
+  box-shadow: var(--shadow-inset);
+  color: var(--ink-soft);
+  line-height: 1.7;
 }
 
 @media (max-width: 640px) {

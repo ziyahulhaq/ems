@@ -3,9 +3,9 @@
   margin: 0 auto 1.5rem;
   padding: 1.3rem;
   border: 1px solid var(--line);
-  border-radius: 18px;
-  background: var(--surface-gradient);
-  box-shadow: none;
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-raised-soft);
 }
 
 .department-list__header {
@@ -79,13 +79,27 @@
   font-weight: 600;
 }
 
+.department-list__readonly {
+  display: inline-flex;
+  align-items: center;
+  min-height: 54px;
+  padding: 0.8rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-soft);
+  box-shadow: var(--shadow-inset);
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
 .department-list__table-wrap {
   margin-top: 1rem;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   border: 1px solid var(--line);
-  border-radius: 16px;
-  background: var(--surface-gradient-soft);
+  border-radius: 14px;
+  background: var(--surface-soft);
   box-shadow: none;
 }
 
@@ -132,7 +146,14 @@
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
-  background: transparent;
+  background: var(--surface);
+}
+
+.department-actions__button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  transform: none;
+  filter: none;
 }
 
 .department-actions__button--edit {
@@ -140,7 +161,7 @@
 }
 
 .department-actions__button--delete {
-  color: #bb6573;
+  color: #9a3f34;
 }
 
 @media (max-width: 768px) {
@@ -194,8 +215,8 @@
     padding: 0.95rem;
     border: 1px solid var(--line);
     border-radius: 14px;
-    background: var(--surface-gradient);
-    box-shadow: none;
+    background: var(--surface);
+    box-shadow: var(--shadow-raised-soft);
   }
 
   .department-list__table tbody tr + tr td {

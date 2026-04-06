@@ -7,13 +7,13 @@ import "./AddDepartment.css";
 const EditDepartment = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [department, setDepartment] = useState({
     dep_name: "",
     description: "",
   });
   const [depLoading, setDepLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { user } = useAuth();
 
   useEffect(() => {
     const fetchDepartment = async () => {
@@ -56,6 +56,7 @@ const EditDepartment = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const payload = {
       dep_name: department.dep_name.trim(),
       description: department.description.trim(),
