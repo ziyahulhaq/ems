@@ -39,7 +39,7 @@ jobs:
 
       - name: Run Backend Tests
         run: |
-          cd backend
+          cd server
           npm test
 
   dependency-submission:
