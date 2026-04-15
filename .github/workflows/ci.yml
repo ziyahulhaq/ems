@@ -22,7 +22,7 @@ jobs:
 
       - name: Install Backend Dependencies
         run: |
-          cd servre
+          cd server
           npm install
 
       - name: Install Frontend Dependencies
@@ -37,5 +37,5 @@ jobs:
 
       - name: Run Backend Tests
         run: |
-          cd servre
+          cd server
           npm test
