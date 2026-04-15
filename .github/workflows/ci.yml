@@ -6,7 +6,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{matrix.os}]}
+    strategy:
+    matrix:
+       os:[ubuntu-latest,windows-latest, macos-latest]
 
     permissions:
       contents: read
@@ -35,3 +38,5 @@ jobs:
       - name: Build Frontend
         working-directory: frdend
         run: npm run build
+   publish:
+    needs: build
