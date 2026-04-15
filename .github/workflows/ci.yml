@@ -3,11 +3,9 @@ name: Node.js CI
 on:
   push:
     branches: ["main"]
- 
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     permissions:
@@ -24,7 +22,7 @@ jobs:
 
       - name: Install Backend Dependencies
         run: |
-          cd backend
+          cd servre
           npm install
 
       - name: Install Frontend Dependencies
@@ -39,24 +37,5 @@ jobs:
 
       - name: Run Backend Tests
         run: |
-          cd server
+          cd servre
           npm test
-
-  dependency-submission:
-
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v5
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v5
-        with:
-          node-version: "24"
-
-      - name: Install Dependencies
-        run: npm install
