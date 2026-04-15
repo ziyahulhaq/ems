@@ -20,19 +20,19 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install Backend Dependencies
+      - name: Install server Dependencies
         run: |
           cd server
           npm install
 
-      - name: Install Frontend Dependencies
+      - name: Install frdend Dependencies
         run: |
-          cd frontend
+          cd frdend
           npm install
 
       - name: Build React App
         run: |
-          cd frontend
+          cd frdend
           npm run build
 
       - name: Run Backend Tests
