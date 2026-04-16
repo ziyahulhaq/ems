@@ -45,7 +45,7 @@ jobs:
         run: echo "Build completed successfully"
 
       - name: Build and Push Docker Image
-        uses: mr-smithers-excellent/docker-build-push@v4
+        uses: mr-smithers-excellent/docker-build-push@v6
         with:
           image: ziyahulhaq/employs:tagname
           registry: docker.io
