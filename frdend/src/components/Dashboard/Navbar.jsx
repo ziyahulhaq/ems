@@ -28,7 +28,7 @@ const Navbar = ({ onMenuClick }) => {
       </div>
 
       <div className="dashboard-navbar__brand">
-        <span className="dashboard-navbar__eyebrow">Employee Management</span>
+        <span className="dashboard-navbar__eyebrow">Employee Managements</span>
         <h2 className="dashboard-navbar__title">
           Welcome back, <span>{user?.name || "User"}</span>
         </h2>
