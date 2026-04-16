@@ -51,9 +51,6 @@ jobs:
       - name: Publish
         run: echo "Build completed successfully"
 
-      - name: Build with Gradle
-        run: ./gradlew build
-
       - name: Build and Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v4
         with:
