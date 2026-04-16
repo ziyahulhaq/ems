@@ -36,12 +36,12 @@ const AdminSummery = () => {
       try {
         setLoading(true);
         const [departmentResponse, leaveResponse] = await Promise.all([
-          axios.get("http://localhost:3444/api/department", {
+          axios.get("http://3.59.139.48:3444/api/department", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }),
-          axios.get("http://localhost:3444/api/leave", {
+          axios.get("http://3.59.139.48:3444/api/leave", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

@@ -20,7 +20,7 @@ const EditDepartment = () => {
       setDepLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:3444/api/department/${id}`,
+          `http://3.59.139.48:3444/api/department/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -70,7 +70,7 @@ const EditDepartment = () => {
     try {
       setIsSubmitting(true);
       const response = await axios.put(
-        `http://localhost:3444/api/department/${id}`,
+        `http://3.59.139.48:3444/api/department/${id}`,
         payload,
         {
           headers: {

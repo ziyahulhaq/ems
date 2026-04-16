@@ -71,7 +71,7 @@ const LeaveManagement = () => {
     try {
       setLoading(true);
       setError("");
-      const response = await axios.get("http://localhost:3444/api/leave", {
+      const response = await axios.get("http://3.59.139.48:3444/api/leave", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -128,7 +128,7 @@ const LeaveManagement = () => {
       setIsSubmitting(true);
       setSubmitError("");
 
-      const response = await axios.post("http://localhost:3444/api/leave", payload, {
+      const response = await axios.post("http://3.59.139.48:3444/api/leave", payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -153,7 +153,7 @@ const LeaveManagement = () => {
       setError("");
 
       const response = await axios.patch(
-        `http://localhost:3444/api/leave/${leaveId}/status`,
+        `http://3.59.139.48:3444/api/leave/${leaveId}/status`,
         {
           status,
           adminNote: adminNotes[leaveId] || "",

@@ -2,7 +2,7 @@ import axios from "axios";
 import { createContext, useEffect, useMemo, useState } from "react";
 
 const EmployeeContext = createContext(null);
-const EMPLOYEE_API_URL = "http://localhost:3444/api/employee";
+const EMPLOYEE_API_URL = "http://3.59.139.48:3444/api/employee";
 
 const EmployeeProvider = ({ children }) => {
   const [employees, setEmployees] = useState([]);

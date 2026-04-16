@@ -37,7 +37,7 @@ const AddDepartment = () => {
     try {
       setIsSubmitting(true);
       const response = await axios.post(
-        "http://localhost:3444/api/department/add",
+        "http://3.59.139.48:3444/api/department/add",
         payload,
         {
           headers: {

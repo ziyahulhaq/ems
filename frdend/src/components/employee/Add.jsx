@@ -52,7 +52,7 @@ const Add = () => {
       }
 
       try {
-        const response = await axios.get("http://localhost:3444/api/department", {
+        const response = await axios.get("http://3.59.139.48:3444/api/department", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
