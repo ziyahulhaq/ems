@@ -1,65 +1,49 @@
 name: Node.js CI
 
 on:
-push:
-branches: ["main"]
+  push:
+    branches: ["main"]
 
 jobs:
-build:
-runs-on: ${{ matrix.os }}
+  build:
+    runs-on: ${{ matrix.os }}
 
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
 
-strategy:
-  matrix:
-    os: [ubuntu-latest, windows-latest, macos-latest]
+    permissions:
+      contents: read
 
-permissions:
-  contents: read
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
 
-steps:
-  - name: Checkout Repository
-    uses: actions/checkout@v5
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            server/package-lock.json
+            frdend/package-lock.json
 
-  - name: Setup Node.js
-    uses: actions/setup-node@v5
-    with:
-      node-version: 22
-      cache: npm
-      cache-dependency-path: |
-        server/package-lock.json
-        frdend/package-lock.json
+      - name: Install Backend Dependencies
+        working-directory: server
+        run: npm install
 
-  - name: Install Backend Dependencies
-    working-directory: server
-    run: npm install
+      - name: Install Frontend Dependencies
+        working-directory: frdend
+        run: npm install
 
-  - name: Install Frontend Dependencies
-    working-directory: frdend
-    run: npm install
+      - name: Build Frontend
+        working-directory: frdend
+        run: npm run build
 
-  - name: Build Frontend
-    working-directory: frdend
-    run: npm run build
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
 
-
-publish:
-needs: build
-runs-on: ubuntu-latest
-
-
-steps:
-  - name: Checkout Repository
-    uses: actions/checkout@v5
-
-  - name: Publish
-    run: echo "Build completed successfully"
-
-  - name: Build and Push Docker Image
-    uses: mr-smithers-excellent/docker-build-push@v4
-    with:
-      image: nanajanashia/demo-app
-      registry: docker.io
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_PASSWORD }}
-      dockerfile: Dockerfile
-```
+    steps:
+      - name: Publish
+        run: echo "Build completed successfully"
