@@ -51,7 +51,7 @@ jobs:
         run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t ziyahulhaq/tagname .
+        run: docker build -t ziyahulhaq/employs:latest .
 
       - name: Push Docker Image
-        run: docker push ziyahulhaq/employs:tagname
+        run: docker push ziyahulhaq/employs:latest
