@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Docker Image CI
 
 on:
   push:
@@ -6,38 +6,6 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v5
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v5
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: |
-            server/package-lock.json
-            frdend/package-lock.json
-
-      - name: Install Backend Dependencies
-        working-directory: server
-        run: npm install
-
-      - name: Install Frontend Dependencies
-        working-directory: frdend
-        run: npm install
-
-      - name: Build Frontend
-        working-directory: frdend
-        run: npm run build
-
-  publish:
-    needs: build
     runs-on: ubuntu-latest
 
     steps:
