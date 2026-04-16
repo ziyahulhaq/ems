@@ -44,13 +44,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v5
 
-      - name: Publish
-        run: echo "Build completed successfully"
+      - name: Login to DockerHub
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
 
-      - name: Build and Push Docker Image
-        uses: mr-smithers-excellent/docker-build-push@v6
-        with:
-          image: ziyahulhaq/employs
-          registry: docker.io
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Docker Image
+        run: docker build -t ziyahulhaq/tagname .
+
+      - name: Push Docker Image
+        run: docker push ziyahulhaq/employs:tagname
