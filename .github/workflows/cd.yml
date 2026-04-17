@@ -3,18 +3,25 @@ name: CD Pipeline
 on:
   workflow_run:
     workflows: ["CI Pipeline"]
-    types: [completed]
+    types:
+      - completed
 
 jobs:
-  build:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: self-hosted
 
     steps:
       - name: Pull Docker image
         run: docker pull ziyahulhaq/employs:latest
 
-      - name: Delete old container
+      - name: Stop and remove old container
         run: docker rm -f employs-container || true
 
-      - name: Run container
-        run: docker run -d -p 3444:3444 --name employs-container ziyahulhaq/employs:latest
+      - name: Run new container
+        run: |
+          docker run -d \
+          -p 3444:3444 \
+          --name employs-container \
+          -e MONGODB_URL=${{ secrets.MONGODB_URL }} \
+          ziyahulhaq/employs:latest
