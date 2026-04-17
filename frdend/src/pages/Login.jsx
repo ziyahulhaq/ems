@@ -63,7 +63,7 @@ function Login() {
             <div className="login-hero__stat">
               <FaArrowRight />
               <div>
-                <strong>Fast workflow</strong>
+                <strong>Fastt workflow</strong>
                 <span>Login and get moving quickly</span>
               </div>
             </div>
