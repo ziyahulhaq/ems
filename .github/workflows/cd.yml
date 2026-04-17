@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Pull Docker image
-        run: sudo docker pull ziyahulhaq/employs:latest
+        run: docker pull ziyahulhaq/employs:latest
 
-      - name: Delete Old docker container
-        run: sudo docker rm -f employs-container || true
+      - name: Delete old container
+        run: docker rm -f employs-container || true
 
-      - name: Run Docker Container
-        run: sudo docker run -d -p 3444:3444 --name employs-container ziyahulhaq/employs:latest
+      - name: Run container
+        run: docker run -d -p 3444:3444 --name employs-container ziyahulhaq/employs:latest
