@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { apiUrl } from "../utils/api";
 
 const UserContext = createContext();
 
@@ -14,14 +15,11 @@ const AuthContext = ({ children }) => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          const response = await axios.get(
-            "http://3.59.139.48:3444/api/auth/verify",
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
+          const response = await axios.get(apiUrl("/auth/verify"), {
+            headers: {
+              Authorization: `Bearer ${token}`,
             },
-          );
+          });
           if (response.data.success) {
             setUser(response.data.user);
           }

@@ -4,6 +4,7 @@ import { FaEnvelope, FaLock, FaShieldAlt, FaUsers, FaArrowRight } from "react-ic
 import "./login.css";
 import axios from "axios";
 import { useAuth } from "../Context/useAuth";
+import { apiUrl } from "../utils/api";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -17,7 +18,7 @@ function Login() {
     setError(null);
 
     try {
-      const response = await axios.post("http://3.59.139.48:3444/api/auth/login", {
+      const response = await axios.post(apiUrl("/auth/login"), {
         email,
         password,
       });

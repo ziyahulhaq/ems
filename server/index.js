@@ -1,5 +1,7 @@
 const express = require("express")
 const cors = require("cors")
+const path = require("path")
+const fs = require("fs")
 const connectToDatabase = require("./db/db.js")
 const authRouter = require("./routes/auth.js")
 const departmentRouter = require("./routes/department.js")
@@ -13,6 +15,17 @@ app.use('/api/auth',authRouter)
 app.use('/api/department', departmentRouter)
 app.use('/api/employee', employeeRouter)
 app.use('/api/leave', leaveRouter)
+
+const frontendDistPath = path.join(__dirname, "..", "frdend", "dist")
+const frontendIndexPath = path.join(frontendDistPath, "index.html")
+
+if (fs.existsSync(frontendIndexPath)) {
+  app.use(express.static(frontendDistPath))
+
+  app.get(/^\/(?!api).*/, (_req, res) => {
+    res.sendFile(frontendIndexPath)
+  })
+}
 
 
 const startServer = async () => {

@@ -1,8 +1,9 @@
 import axios from "axios";
 import { createContext, useEffect, useMemo, useState } from "react";
+import { apiUrl } from "../utils/api";
 
 const EmployeeContext = createContext(null);
-const EMPLOYEE_API_URL = "http://3.59.139.48:3444/api/employee";
+const EMPLOYEE_API_URL = apiUrl("/employee");
 
 const EmployeeProvider = ({ children }) => {
   const [employees, setEmployees] = useState([]);

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/useAuth";
 import { DepartmentButtons } from "../../utils/DepartmentHelper";
+import { apiUrl } from "../../utils/api";
 import "./DepartmentList.css";
 
 const DepartmentList = () => {
@@ -31,7 +32,7 @@ const DepartmentList = () => {
     const fetchDepartments = async () => {
       setDepLoading(true);
       try {
-        const response = await axios.get("http://3.59.139.48:3444/api/department", {
+        const response = await axios.get(apiUrl("/department"), {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

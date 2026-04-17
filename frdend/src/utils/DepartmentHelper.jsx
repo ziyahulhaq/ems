@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { apiUrl } from "./api";
 
 export const DepartmentButtons = ({ DepId, onDepartmentDelete, readOnly = false }) => {
   const navigate = useNavigate();
@@ -7,7 +8,7 @@ export const DepartmentButtons = ({ DepId, onDepartmentDelete, readOnly = false 
   const handleDelete = async () => {
     try {
       const response = await axios.delete(
-        `http://3.59.139.48:3444/api/department/${DepId}`,
+        apiUrl(`/department/${DepId}`),
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

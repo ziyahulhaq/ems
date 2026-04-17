@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../Context/useAuth";
+import { apiUrl } from "../../utils/api";
 import "./AddDepartment.css";
 
 const EditDepartment = () => {
@@ -20,7 +21,7 @@ const EditDepartment = () => {
       setDepLoading(true);
       try {
         const response = await axios.get(
-          `http://3.59.139.48:3444/api/department/${id}`,
+          apiUrl(`/department/${id}`),
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -70,7 +71,7 @@ const EditDepartment = () => {
     try {
       setIsSubmitting(true);
       const response = await axios.put(
-        `http://3.59.139.48:3444/api/department/${id}`,
+        apiUrl(`/department/${id}`),
         payload,
         {
           headers: {

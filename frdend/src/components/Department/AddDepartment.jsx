@@ -3,6 +3,7 @@ import "./AddDepartment.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/useAuth";
+import { apiUrl } from "../../utils/api";
 
 const AddDepartment = () => {
   const { user } = useAuth();
@@ -37,7 +38,7 @@ const AddDepartment = () => {
     try {
       setIsSubmitting(true);
       const response = await axios.post(
-        "http://3.59.139.48:3444/api/department/add",
+        apiUrl("/department/add"),
         payload,
         {
           headers: {

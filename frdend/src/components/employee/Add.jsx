@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEmployees } from "../../Context/useEmployees";
 import { useAuth } from "../../Context/useAuth";
+import { apiUrl } from "../../utils/api";
 import "./Employee.css";
 
 const EMPTY_EMPLOYEE = {
@@ -52,7 +53,7 @@ const Add = () => {
       }
 
       try {
-        const response = await axios.get("http://3.59.139.48:3444/api/department", {
+        const response = await axios.get(apiUrl("/department"), {
           headers: {
             Authorization: `Bearer ${token}`,
           },
