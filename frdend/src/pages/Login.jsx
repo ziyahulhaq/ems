@@ -47,7 +47,7 @@ function Login() {
             <FaShieldAlt />
             Secure workforce acces
           </div>
-          <h1 className="login-hero__title">workspace mahage.</h1>
+          <h1 className="login-hero__title">Manage Your Team From One Focused workspace.</h1>
           <p className="login-hero__text">
             Keep departments, employees, leaves, and payroll aligned in a dashboard
             that works beautifully on desktop and mobile.
