@@ -14,7 +14,7 @@ const allowedOrigins = (process.env.CORS_ORIGIN || "")
   .map((origin) => origin.trim())
   .filter(Boolean)
 
-app.use(cors({
+const corsOptions = {
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
       return callback(null, true)
@@ -24,7 +24,10 @@ app.use(cors({
   },
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-}))
+}
+
+app.use(cors(corsOptions))
+app.options(/^\/api\/.*/, cors(corsOptions))
 app.use(express.json({ limit: "10mb" }))
 app.use('/api/auth',authRouter)
 app.use('/api/department', departmentRouter)
