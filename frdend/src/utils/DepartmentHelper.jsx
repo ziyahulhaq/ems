@@ -1,14 +1,13 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { apiUrl } from "./api";
+import api from "./api";
 
 export const DepartmentButtons = ({ DepId, onDepartmentDelete, readOnly = false }) => {
   const navigate = useNavigate();
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(
-        apiUrl(`/department/${DepId}`),
+      const response = await api.delete(
+        `/department/${DepId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

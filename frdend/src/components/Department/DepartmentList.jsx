@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/useAuth";
 import { DepartmentButtons } from "../../utils/DepartmentHelper";
-import { apiUrl } from "../../utils/api";
+import api from "../../utils/api";
 import "./DepartmentList.css";
 
 const DepartmentList = () => {
@@ -32,7 +31,7 @@ const DepartmentList = () => {
     const fetchDepartments = async () => {
       setDepLoading(true);
       try {
-        const response = await axios.get(apiUrl("/department"), {
+        const response = await api.get("/department", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

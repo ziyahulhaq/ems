@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./AddDepartment.css";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/useAuth";
-import { apiUrl } from "../../utils/api";
+import api from "../../utils/api";
 
 const AddDepartment = () => {
   const { user } = useAuth();
@@ -37,8 +36,8 @@ const AddDepartment = () => {
 
     try {
       setIsSubmitting(true);
-      const response = await axios.post(
-        apiUrl("/department/add"),
+      const response = await api.post(
+        "/department/add",
         payload,
         {
           headers: {

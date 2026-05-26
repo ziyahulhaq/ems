@@ -1,9 +1,8 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEmployees } from "../../Context/useEmployees";
 import { useAuth } from "../../Context/useAuth";
-import { apiUrl } from "../../utils/api";
+import api from "../../utils/api";
 import "./Employee.css";
 
 const EMPTY_EMPLOYEE = {
@@ -53,7 +52,7 @@ const Add = () => {
       }
 
       try {
-        const response = await axios.get(apiUrl("/department"), {
+        const response = await api.get("/department", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
 import { Navigate } from "react-router-dom";
 import {
   FaBriefcase,
@@ -13,7 +12,7 @@ import {
 import { useAuth } from "../../Context/useAuth";
 import { useEmployees } from "../../Context/useEmployees";
 import SummeryCard from "./SummeryCard";
-import { apiUrl } from "../../utils/api";
+import api from "../../utils/api";
 import "./DashboardSummary.css";
 
 const AdminSummery = () => {
@@ -37,12 +36,12 @@ const AdminSummery = () => {
       try {
         setLoading(true);
         const [departmentResponse, leaveResponse] = await Promise.all([
-          axios.get(apiUrl("/department"), {
+          api.get("/department", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }),
-          axios.get(apiUrl("/leave"), {
+          api.get("/leave", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

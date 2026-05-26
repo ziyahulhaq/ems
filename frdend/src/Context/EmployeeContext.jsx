@@ -1,9 +1,8 @@
-import axios from "axios";
 import { createContext, useEffect, useMemo, useState } from "react";
-import { apiUrl } from "../utils/api";
+import api from "../utils/api";
 
 const EmployeeContext = createContext(null);
-const EMPLOYEE_API_URL = apiUrl("/employee");
+const EMPLOYEE_API_URL = "/employee";
 
 const EmployeeProvider = ({ children }) => {
   const [employees, setEmployees] = useState([]);
@@ -24,7 +23,7 @@ const EmployeeProvider = ({ children }) => {
       setLoading(true);
       setError("");
 
-      const response = await axios.get(EMPLOYEE_API_URL, {
+      const response = await api.get(EMPLOYEE_API_URL, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -64,7 +63,7 @@ const EmployeeProvider = ({ children }) => {
           throw new Error("Please login again");
         }
 
-        const response = await axios.post(`${EMPLOYEE_API_URL}/add`, employee, {
+        const response = await api.post(`${EMPLOYEE_API_URL}/add`, employee, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -88,7 +87,7 @@ const EmployeeProvider = ({ children }) => {
           throw new Error("Please login again");
         }
 
-        const response = await axios.patch(`${EMPLOYEE_API_URL}/${employeeId}`, updates, {
+        const response = await api.patch(`${EMPLOYEE_API_URL}/${employeeId}`, updates, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -113,7 +112,7 @@ const EmployeeProvider = ({ children }) => {
           throw new Error("Please login again");
         }
 
-        const response = await axios.delete(`${EMPLOYEE_API_URL}/${employeeId}`, {
+        const response = await api.delete(`${EMPLOYEE_API_URL}/${employeeId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

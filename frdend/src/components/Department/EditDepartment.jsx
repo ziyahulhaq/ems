@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../Context/useAuth";
-import { apiUrl } from "../../utils/api";
+import api from "../../utils/api";
 import "./AddDepartment.css";
 
 const EditDepartment = () => {
@@ -20,8 +19,8 @@ const EditDepartment = () => {
     const fetchDepartment = async () => {
       setDepLoading(true);
       try {
-        const response = await axios.get(
-          apiUrl(`/department/${id}`),
+        const response = await api.get(
+          `/department/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -70,8 +69,8 @@ const EditDepartment = () => {
 
     try {
       setIsSubmitting(true);
-      const response = await axios.put(
-        apiUrl(`/department/${id}`),
+      const response = await api.put(
+        `/department/${id}`,
         payload,
         {
           headers: {

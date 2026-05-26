@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
-import axios from "axios";
 import { useAuth } from "../../Context/useAuth";
-import { apiUrl } from "../../utils/api";
+import api from "../../utils/api";
 import "./LeaveManagement.css";
 
 const LEAVE_TYPES = [
@@ -72,7 +71,7 @@ const LeaveManagement = () => {
     try {
       setLoading(true);
       setError("");
-      const response = await axios.get(apiUrl("/leave"), {
+      const response = await api.get("/leave", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -129,7 +128,7 @@ const LeaveManagement = () => {
       setIsSubmitting(true);
       setSubmitError("");
 
-      const response = await axios.post(apiUrl("/leave"), payload, {
+      const response = await api.post("/leave", payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -153,8 +152,8 @@ const LeaveManagement = () => {
       setActiveLeaveId(leaveId);
       setError("");
 
-      const response = await axios.patch(
-        apiUrl(`/leave/${leaveId}/status`),
+      const response = await api.patch(
+        `/leave/${leaveId}/status`,
         {
           status,
           adminNote: adminNotes[leaveId] || "",
