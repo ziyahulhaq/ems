@@ -33,7 +33,7 @@ function Login() {
       if (err.response?.data?.error) {
         setError(err.response.data.error);
       } else {
-        setError("Server error");
+        setError(err.message || "Server error");
       }
     }
   };
