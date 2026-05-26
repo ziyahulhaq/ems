@@ -146,3 +146,8 @@ vite.config.ts.timestamp-*
 .codex/
 
 .codex
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
