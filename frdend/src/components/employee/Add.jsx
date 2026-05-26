@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useEmployees } from "../../Context/useEmployees";
 import { useAuth } from "../../Context/useAuth";
-import api from "../../utils/api";
+import api, { apiUrl } from "../../utils/api";
 import "./Employee.css";
 
 const EMPTY_EMPLOYEE = {
@@ -52,7 +52,7 @@ const Add = () => {
       }
 
       try {
-        const response = await api.get("/api/department", {
+        const response = await api.get(apiUrl("department"), {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -1,8 +1,8 @@
 import { createContext, useEffect, useMemo, useState } from "react";
-import api from "../utils/api";
+import api, { apiUrl } from "../utils/api";
 
 const EmployeeContext = createContext(null);
-const EMPLOYEE_API_URL = "/api/employee";
+const EMPLOYEE_API_RESOURCE = "employee";
 
 const EmployeeProvider = ({ children }) => {
   const [employees, setEmployees] = useState([]);
@@ -23,7 +23,7 @@ const EmployeeProvider = ({ children }) => {
       setLoading(true);
       setError("");
 
-      const response = await api.get(EMPLOYEE_API_URL, {
+      const response = await api.get(apiUrl(EMPLOYEE_API_RESOURCE), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -63,7 +63,7 @@ const EmployeeProvider = ({ children }) => {
           throw new Error("Please login again");
         }
 
-        const response = await api.post(`${EMPLOYEE_API_URL}/add`, employee, {
+        const response = await api.post(apiUrl(EMPLOYEE_API_RESOURCE, "add"), employee, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -87,7 +87,7 @@ const EmployeeProvider = ({ children }) => {
           throw new Error("Please login again");
         }
 
-        const response = await api.patch(`${EMPLOYEE_API_URL}/${employeeId}`, updates, {
+        const response = await api.patch(apiUrl(EMPLOYEE_API_RESOURCE, employeeId), updates, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -112,7 +112,7 @@ const EmployeeProvider = ({ children }) => {
           throw new Error("Please login again");
         }
 
-        const response = await api.delete(`${EMPLOYEE_API_URL}/${employeeId}`, {
+        const response = await api.delete(apiUrl(EMPLOYEE_API_RESOURCE, employeeId), {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/useAuth";
 import { DepartmentButtons } from "../../utils/DepartmentHelper";
-import api from "../../utils/api";
+import api, { apiUrl } from "../../utils/api";
 import "./DepartmentList.css";
 
 const DepartmentList = () => {
@@ -31,7 +31,7 @@ const DepartmentList = () => {
     const fetchDepartments = async () => {
       setDepLoading(true);
       try {
-        const response = await api.get("/api/department", {
+        const response = await api.get(apiUrl("department"), {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

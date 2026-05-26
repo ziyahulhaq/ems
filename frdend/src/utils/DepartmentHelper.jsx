@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import api from "./api";
+import api, { apiUrl } from "./api";
 
 export const DepartmentButtons = ({ DepId, onDepartmentDelete, readOnly = false }) => {
   const navigate = useNavigate();
@@ -7,7 +7,7 @@ export const DepartmentButtons = ({ DepId, onDepartmentDelete, readOnly = false 
   const handleDelete = async () => {
     try {
       const response = await api.delete(
-        `/api/department/${DepId}`,
+        apiUrl("department", DepId),
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

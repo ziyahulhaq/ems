@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "../../Context/useAuth";
-import api from "../../utils/api";
+import api, { apiUrl } from "../../utils/api";
 import "./LeaveManagement.css";
 
 const LEAVE_TYPES = [
@@ -71,7 +71,7 @@ const LeaveManagement = () => {
     try {
       setLoading(true);
       setError("");
-      const response = await api.get("/api/leave", {
+      const response = await api.get(apiUrl("leave"), {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -128,7 +128,7 @@ const LeaveManagement = () => {
       setIsSubmitting(true);
       setSubmitError("");
 
-      const response = await api.post("/api/leave", payload, {
+      const response = await api.post(apiUrl("leave"), payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -153,7 +153,7 @@ const LeaveManagement = () => {
       setError("");
 
       const response = await api.patch(
-        `/api/leave/${leaveId}/status`,
+        apiUrl("leave", leaveId, "status"),
         {
           status,
           adminNote: adminNotes[leaveId] || "",

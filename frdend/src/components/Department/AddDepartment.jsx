@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./AddDepartment.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../Context/useAuth";
-import api from "../../utils/api";
+import api, { apiUrl } from "../../utils/api";
 
 const AddDepartment = () => {
   const { user } = useAuth();
@@ -37,7 +37,7 @@ const AddDepartment = () => {
     try {
       setIsSubmitting(true);
       const response = await api.post(
-        "/api/department/add",
+        apiUrl("department", "add"),
         payload,
         {
           headers: {

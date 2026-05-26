@@ -12,7 +12,7 @@ import {
 import { useAuth } from "../../Context/useAuth";
 import { useEmployees } from "../../Context/useEmployees";
 import SummeryCard from "./SummeryCard";
-import api from "../../utils/api";
+import api, { apiUrl } from "../../utils/api";
 import "./DashboardSummary.css";
 
 const AdminSummery = () => {
@@ -36,12 +36,12 @@ const AdminSummery = () => {
       try {
         setLoading(true);
         const [departmentResponse, leaveResponse] = await Promise.all([
-          api.get("/api/department", {
+          api.get(apiUrl("department"), {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }),
-          api.get("/api/leave", {
+          api.get(apiUrl("leave"), {
             headers: {
               Authorization: `Bearer ${token}`,
             },

@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../utils/api";
+import api, { apiUrl } from "../utils/api";
 
 const UserContext = createContext();
 
@@ -14,7 +14,7 @@ const AuthContext = ({ children }) => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          const response = await api.get("/api/auth/verify", {
+          const response = await api.get(apiUrl("auth", "verify"), {
             headers: {
               Authorization: `Bearer ${token}`,
             },

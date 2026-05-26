@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaLock, FaShieldAlt, FaUsers, FaArrowRight } from "react-icons/fa";
 import "./login.css";
 import { useAuth } from "../Context/useAuth";
-import api from "../utils/api";
+import api, { apiUrl } from "../utils/api";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -17,7 +17,7 @@ function Login() {
     setError(null);
 
     try {
-      const response = await api.post("/api/auth/login", {
+      const response = await api.post(apiUrl("auth", "login"), {
         email,
         password,
       });
