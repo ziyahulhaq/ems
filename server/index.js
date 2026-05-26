@@ -9,7 +9,22 @@ const employeeRouter = require("./routes/employee.js")
 const leaveRouter = require("./routes/leave.js")
 
 const app = express()
-app.use(cors())
+const allowedOrigins = (process.env.CORS_ORIGIN || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean)
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+      return callback(null, true)
+    }
+
+    return callback(new Error("Not allowed by CORS"))
+  },
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}))
 app.use(express.json({ limit: "10mb" }))
 app.use('/api/auth',authRouter)
 app.use('/api/department', departmentRouter)
