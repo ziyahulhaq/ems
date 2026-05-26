@@ -31,7 +31,7 @@ const DepartmentList = () => {
     const fetchDepartments = async () => {
       setDepLoading(true);
       try {
-        const response = await api.get("/department", {
+        const response = await api.get("/api/department", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

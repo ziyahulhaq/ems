@@ -52,7 +52,7 @@ const Add = () => {
       }
 
       try {
-        const response = await api.get("/department", {
+        const response = await api.get("/api/department", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

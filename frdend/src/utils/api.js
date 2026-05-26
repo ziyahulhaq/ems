@@ -6,26 +6,23 @@ const normalizeApiBaseUrl = (apiUrl) => {
   const trimmedApiUrl = apiUrl?.trim();
 
   if (!trimmedApiUrl) {
-    return import.meta.env.DEV ? API_PATH : "";
+    return "";
   }
 
-  const withoutTrailingSlash = trimmedApiUrl.replace(/\/+$/, "");
-
   try {
-    const url = new URL(withoutTrailingSlash);
+    const url = new URL(trimmedApiUrl);
     const normalizedPath = url.pathname.replace(/\/+$/, "");
 
-    if (!normalizedPath || normalizedPath === "/") {
-      url.pathname = API_PATH;
+    if (normalizedPath === API_PATH) {
+      url.pathname = "/";
     }
+
+    url.search = "";
+    url.hash = "";
 
     return url.toString().replace(/\/+$/, "");
   } catch {
-    const relativeUrl = withoutTrailingSlash.startsWith("/")
-      ? withoutTrailingSlash
-      : `/${withoutTrailingSlash}`;
-
-    return relativeUrl;
+    return "";
   }
 };
 
@@ -39,7 +36,7 @@ api.interceptors.request.use((config) => {
   if (!API_BASE_URL) {
     return Promise.reject(
       new Error(
-        "Missing VITE_API_URL. Set it to the backend API URL, for example https://your-backend.example.com/api.",
+        "Missing or invalid VITE_API_URL. Set it to the backend API origin, for example https://ems-yx5o.onrender.com.",
       ),
     );
   }
@@ -48,4 +45,4 @@ api.interceptors.request.use((config) => {
 });
 
 export default api;
-export { API_BASE_URL, normalizeApiBaseUrl };
+export { API_BASE_URL, API_PATH, normalizeApiBaseUrl };

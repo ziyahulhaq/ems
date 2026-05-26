@@ -71,7 +71,7 @@ const LeaveManagement = () => {
     try {
       setLoading(true);
       setError("");
-      const response = await api.get("/leave", {
+      const response = await api.get("/api/leave", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -128,7 +128,7 @@ const LeaveManagement = () => {
       setIsSubmitting(true);
       setSubmitError("");
 
-      const response = await api.post("/leave", payload, {
+      const response = await api.post("/api/leave", payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -153,7 +153,7 @@ const LeaveManagement = () => {
       setError("");
 
       const response = await api.patch(
-        `/leave/${leaveId}/status`,
+        `/api/leave/${leaveId}/status`,
         {
           status,
           adminNote: adminNotes[leaveId] || "",

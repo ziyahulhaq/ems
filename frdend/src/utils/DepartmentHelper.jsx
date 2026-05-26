@@ -7,7 +7,7 @@ export const DepartmentButtons = ({ DepId, onDepartmentDelete, readOnly = false 
   const handleDelete = async () => {
     try {
       const response = await api.delete(
-        `/department/${DepId}`,
+        `/api/department/${DepId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

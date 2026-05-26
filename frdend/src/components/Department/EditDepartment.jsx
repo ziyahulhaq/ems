@@ -20,7 +20,7 @@ const EditDepartment = () => {
       setDepLoading(true);
       try {
         const response = await api.get(
-          `/department/${id}`,
+          `/api/department/${id}`,
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -70,7 +70,7 @@ const EditDepartment = () => {
     try {
       setIsSubmitting(true);
       const response = await api.put(
-        `/department/${id}`,
+        `/api/department/${id}`,
         payload,
         {
           headers: {

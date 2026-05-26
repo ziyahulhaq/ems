@@ -14,7 +14,7 @@ const AuthContext = ({ children }) => {
       try {
         const token = localStorage.getItem("token");
         if (token) {
-          const response = await api.get("/auth/verify", {
+          const response = await api.get("/api/auth/verify", {
             headers: {
               Authorization: `Bearer ${token}`,
             },

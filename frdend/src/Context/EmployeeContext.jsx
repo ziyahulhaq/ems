@@ -2,7 +2,7 @@ import { createContext, useEffect, useMemo, useState } from "react";
 import api from "../utils/api";
 
 const EmployeeContext = createContext(null);
-const EMPLOYEE_API_URL = "/employee";
+const EMPLOYEE_API_URL = "/api/employee";
 
 const EmployeeProvider = ({ children }) => {
   const [employees, setEmployees] = useState([]);

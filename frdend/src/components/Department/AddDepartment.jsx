@@ -37,7 +37,7 @@ const AddDepartment = () => {
     try {
       setIsSubmitting(true);
       const response = await api.post(
-        "/department/add",
+        "/api/department/add",
         payload,
         {
           headers: {
